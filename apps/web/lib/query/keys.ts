@@ -32,6 +32,11 @@ export const queryKeys = {
     course: (courseUuid: string) => ['videoProgress', 'course', courseUuid] as const,
     admin: (courseUuid: string, params: string) => ['videoProgress', 'admin', courseUuid, params] as const,
   },
+  videoQuiz: {
+    learner: (activityUuid: string) => ['videoQuiz', 'learner', activityUuid] as const,
+    admin: (activityUuid: string) => ['videoQuiz', 'admin', activityUuid] as const,
+    stats: (activityUuid: string) => ['videoQuiz', 'stats', activityUuid] as const,
+  },
   folders: {
     list: (orgId: number) => ['folders', orgId] as const,
     detail: (uuid: string) => ['folder', uuid] as const,

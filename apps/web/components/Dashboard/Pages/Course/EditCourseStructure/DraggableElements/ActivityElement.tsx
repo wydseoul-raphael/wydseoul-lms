@@ -2,6 +2,7 @@ import ConfirmationModal from '@components/Objects/StyledElements/ConfirmationMo
 import Modal from '@components/Objects/StyledElements/Modal/Modal'
 import ToolTip from '@components/Objects/StyledElements/Tooltip/Tooltip'
 import EditVideoActivityModal from '@components/Objects/Modals/Activities/Edit/EditVideoActivityModal'
+import VideoQuizEditorModal from '@components/Objects/Modals/Activities/Edit/VideoQuizEditorModal'
 import EditDocumentActivityModal from '@components/Objects/Modals/Activities/Edit/EditDocumentActivityModal'
 import EditScormActivityModal from '@components/Objects/Modals/Activities/Edit/EditScormActivityModal'
 import { getUriWithOrg } from '@services/config/config'
@@ -22,6 +23,7 @@ import {
   File,
   FilePenLine,
   Globe,
+  ListChecks,
   GripVertical,
   Loader2,
   MoreVertical,
@@ -86,6 +88,7 @@ function ActivityElement(props: ActivitiyElementProps) {
   const [isPublishing, setIsPublishing] = React.useState<boolean>(false)
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false)
   const [editVideoModalOpen, setEditVideoModalOpen] = React.useState(false)
+  const [quizModalOpen, setQuizModalOpen] = React.useState(false)
   const [editDocumentModalOpen, setEditDocumentModalOpen] = React.useState(false)
   const [editScormModalOpen, setEditScormModalOpen] = React.useState(false)
   const activityUUID = props.activity.activity_uuid
@@ -358,6 +361,25 @@ function ActivityElement(props: ActivitiyElementProps) {
               </button>
               <div className="w-px h-5 bg-gray-200/80 mx-1" />
               <div className="flex items-center gap-1">
+              {props.activity.activity_type === 'TYPE_VIDEO' && (
+                <Modal
+                  isDialogOpen={quizModalOpen}
+                  onOpenChange={() => setQuizModalOpen(!quizModalOpen)}
+                  minHeight="no-min"
+                  minWidth="lg"
+                  dialogTitle="Video quiz"
+                  dialogDescription="Checkpoint questions that pause the video and the end-of-video quiz (100% to complete)."
+                  dialogContent={<VideoQuizEditorModal activity={props.activity} onClose={() => setQuizModalOpen(false)} />}
+                  dialogTrigger={
+                    <button
+                      className="h-7 w-7 flex items-center justify-center rounded-md text-gray-400 hover:text-wyd-blue hover:bg-gray-100 transition-colors"
+                      title="Edit quiz"
+                    >
+                      <ListChecks size={15} />
+                    </button>
+                  }
+                />
+              )}
               {props.activity.activity_type === 'TYPE_VIDEO' ? (
                 <Modal
                   isDialogOpen={editVideoModalOpen}

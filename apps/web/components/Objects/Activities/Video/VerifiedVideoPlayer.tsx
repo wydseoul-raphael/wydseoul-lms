@@ -11,6 +11,11 @@ import { isActivityHlsReady, resolveActivityVideoSource, resolveActivityCaptions
 import { useVideoWatchTracker } from './useVideoWatchTracker'
 import { formatClock, formatVerifiedReadout, MAX_PLAYBACK_RATE } from './watchPolicy'
 import { SignVideoCompanion } from './SignVideoCompanion'
+import { useVideoQuiz } from './Quiz/useVideoQuiz'
+import { CheckpointOverlay } from './Quiz/CheckpointOverlay'
+import { EndQuizPanel } from './Quiz/EndQuizPanel'
+import { checkpointToTrigger, clampSeekToCheckpoints } from '@/lib/videoQuiz/checkpoints'
+import type { QuizQuestionPublic } from '@services/courses/videoQuiz'
 
 const RATES = [0.75, 1, 1.25, 1.5, 2]
 const SKIP_S = 15
@@ -69,6 +74,42 @@ export default function VerifiedVideoPlayer({ activity, course, orgUuid, onCompl
     enabled: !!source,
     onComplete,
   })
+
+  // Quiz: checkpoints pause the video; the end quiz unlocks once the video is
+  // verified. Answered checkpoints come from the server so a reload resumes.
+  const quiz = useVideoQuiz(activity.activity_uuid, { orgId: org?.id, courseUuid: course?.course_uuid })
+  const quizQuestions: QuizQuestionPublic[] = quiz.data?.questions || []
+  const [answeredLocal, setAnsweredLocal] = useState<string[]>([])
+  const answered = useMemo(() => {
+    const fromServer = Object.entries(quiz.data?.state?.checkpoints || {})
+      .filter(([id, v]) => v.answered && (v.correct || !quizQuestions.find((q) => q.id === id)?.required_correct))
+      .map(([id]) => id)
+    return new Set([...fromServer, ...answeredLocal])
+  }, [quiz.data?.state?.checkpoints, answeredLocal, quizQuestions])
+  const [activeCheckpoint, setActiveCheckpoint] = useState<QuizQuestionPublic | null>(null)
+  const prevTimeRef = useRef(0)
+
+  useEffect(() => {
+    const t = tracker.currentTime
+    const prev = prevTimeRef.current
+    prevTimeRef.current = t
+    if (activeCheckpoint || !tracker.playing || quizQuestions.length === 0) return
+    const hit = checkpointToTrigger(quizQuestions, prev, t, answered)
+    if (hit) {
+      adapterRef.current?.pause()
+      setActiveCheckpoint(hit)
+    }
+  }, [tracker.currentTime, tracker.playing, quizQuestions, answered, activeCheckpoint])
+
+  // Seeks go through the tracker (verified front) AND the checkpoint gate.
+  const requestSeek = useCallback(
+    (target: number) => {
+      const limit = clampSeekToCheckpoints(target, quizQuestions, answered, tracker.duration || Infinity)
+      if (limit < target - 0.25) toast(t('activities.video_quiz.seek_blocked'))
+      tracker.requestSeek(limit)
+    },
+    [quizQuestions, answered, tracker, t]
+  )
 
   // Mount the adapter for the current source; fail over on fatal errors.
   useEffect(() => {
@@ -182,6 +223,20 @@ export default function VerifiedVideoPlayer({ activity, course, orgUuid, onCompl
           {content.signVideo && (
             <SignVideoCompanion signVideo={content.signVideo} mainRef={adapterRef} mainPlaying={tracker.playing} lang={lang} ids={ids} visible={showSign} />
           )}
+          {activeCheckpoint && (
+            <CheckpointOverlay
+              question={activeCheckpoint}
+              onAnswer={async (attemptId, selected) => {
+                const res = await quiz.checkpoint.mutateAsync({ questionId: activeCheckpoint.id, attemptId, selected })
+                if (res.canContinue) setAnsweredLocal((a) => [...a, activeCheckpoint.id])
+                return res
+              }}
+              onContinue={() => {
+                setActiveCheckpoint(null)
+                adapterRef.current?.play()
+              }}
+            />
+          )}
           {mountError && (
             <div role="alert" className="absolute inset-0 z-30 grid place-items-center bg-black/85 p-6 text-center text-sm font-semibold text-white">
               {mountError}
@@ -210,10 +265,10 @@ export default function VerifiedVideoPlayer({ activity, course, orgUuid, onCompl
           {tracker.playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
           {tracker.playing ? t('wyd.player.pause', { defaultValue: 'Pause' }) : t('wyd.player.play', { defaultValue: 'Play' })}
         </button>
-        <button type="button" onClick={() => tracker.requestSeek(tracker.currentTime - SKIP_S)} className={btn} aria-label={t('activities.video_engine.back_15', { defaultValue: 'Back 15 seconds' })}>
+        <button type="button" onClick={() => requestSeek(tracker.currentTime - SKIP_S)} className={btn} aria-label={t('activities.video_engine.back_15', { defaultValue: 'Back 15 seconds' })}>
           <RotateCcw size={15} aria-hidden="true" />15
         </button>
-        <button type="button" onClick={() => tracker.requestSeek(tracker.currentTime + SKIP_S)} className={btn} aria-label={t('activities.video_engine.forward_15', { defaultValue: 'Forward 15 seconds' })}>
+        <button type="button" onClick={() => requestSeek(tracker.currentTime + SKIP_S)} className={btn} aria-label={t('activities.video_engine.forward_15', { defaultValue: 'Forward 15 seconds' })}>
           <RotateCw size={15} aria-hidden="true" />15
         </button>
 
@@ -226,7 +281,7 @@ export default function VerifiedVideoPlayer({ activity, course, orgUuid, onCompl
             max={Math.max(1, duration)}
             step={0.1}
             value={Math.min(tracker.currentTime, Math.max(1, duration))}
-            onChange={(e) => tracker.requestSeek(Number(e.target.value) || 0)}
+            onChange={(e) => requestSeek(Number(e.target.value) || 0)}
             aria-valuetext={`${formatClock(tracker.currentTime)} / ${formatClock(duration)} · ${t('activities.video_engine.seek_allowed_until', { defaultValue: 'Available through {{time}}', time: formatClock(tracker.furthest) })}`}
             className="wyd-seek h-2 flex-1 cursor-pointer appearance-none rounded-full"
             style={{
@@ -337,6 +392,18 @@ export default function VerifiedVideoPlayer({ activity, course, orgUuid, onCompl
         <div role="alert" className="mt-2 rounded-lg border border-wyd-red/40 bg-[#fff0f1] px-3 py-2 text-[13px] font-semibold text-wyd-red">
           {t('activities.video_engine.session_error', { defaultValue: 'Could not start a verified watch session for this video.' })}
         </div>
+      )}
+      {snap?.completionState === 'video_complete_quiz_pending' && (
+        <p className="mt-2 rounded-lg bg-[#fff9d8] px-3 py-2 text-[13px] font-semibold text-wyd-navy">
+          {t('activities.video_engine.quiz_pending', { defaultValue: 'Video done — pass the quiz to complete this lesson.' })}
+        </p>
+      )}
+      {quiz.data && quiz.data.hasEndQuiz && (
+        <EndQuizPanel
+          quiz={quiz.data}
+          videoComplete={!!snap?.videoComplete}
+          onSubmit={(attemptId, answers) => quiz.endQuiz.mutateAsync({ attemptId, answers })}
+        />
       )}
     </div>
   )
