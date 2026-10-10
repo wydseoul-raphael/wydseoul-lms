@@ -36,6 +36,8 @@ class UserAuditEventType:
     COURSE_ENROLLED = "course_enrolled"
     ACTIVITY_COMPLETED = "activity_completed"
     COURSE_COMPLETED = "course_completed"
+    # All required (mandatory) courses done — the logistics hand-off marker.
+    ALL_REQUIRED_COURSES_COMPLETED = "all_required_courses_completed"
 
     # Assessments (student side). These matter most for the durable log because
     # assignment retries reset the live submission row in place; the grade a

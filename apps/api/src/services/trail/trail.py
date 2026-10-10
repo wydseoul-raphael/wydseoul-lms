@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 from uuid import uuid4
 from sqlmodel import select, func, delete as sql_delete
@@ -379,14 +379,30 @@ async def complete_activity_for_user(
             target_uuid=course.course_uuid,
             metadata={"course_name": course.name},
         )
+        from src.services.learning_management.events import (
+            certificate_uuid_for,
+            maybe_emit_all_required_courses_completed,
+        )
+        from src.services.learning_management.required_courses import is_required_course
+
+        cert_uuid = await certificate_uuid_for(user.id, course.id, db_session) if course.id else None
         await dispatch_webhooks(
             event_name=analytics_events.COURSE_COMPLETED,
             org_id=course.org_id,
             data={
                 "user": {"user_uuid": user.user_uuid, "email": user.email, "username": user.username},
                 "course": {"course_uuid": course.course_uuid, "name": course.name},
+                "completed_at": datetime.now(timezone.utc).isoformat(),
+                "certificate": {"user_certification_uuid": cert_uuid},
+                "required": is_required_course(course),
             },
         )
+        # Mandatory-training hand-off: fires once when the LAST required course
+        # is done (idempotent through the audit marker).
+        try:
+            await maybe_emit_all_required_courses_completed(user, course.org_id, db_session)
+        except Exception:  # pragma: no cover - never block completion on the hand-off
+            pass
 
     return trail, is_new_completion
 
