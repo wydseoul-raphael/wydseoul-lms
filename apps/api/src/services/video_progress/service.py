@@ -380,9 +380,14 @@ async def _maybe_complete(
         "completedAt": ts.isoformat(),
         "completedBy": "video_engine",
     }
-    if has_end_quiz(activity.details):
+    from src.services.courses.activities.video_quiz import get_quiz_gate_state
+
+    gate = await get_quiz_gate_state(user.id, activity.id, db_session)
+    if gate["required"] and not gate["passed"]:
         progress.completion_state = VideoProgressCompletionState.VIDEO_COMPLETE_QUIZ_PENDING
     else:
+        step_data["bestQuizScore"] = gate.get("bestScore")
+        step_data["quizPassed"] = gate["passed"] if gate["hasEndQuiz"] else None
         progress.completion_state = VideoProgressCompletionState.COMPLETE
         db_session.add(progress)
         await db_session.commit()
@@ -639,6 +644,51 @@ __all__ = [
     "get_activity_progress",
     "get_course_progress_summary",
     "get_course_progress_admin",
+    "complete_after_quiz_pass",
     "verify_activity_reader_access",
     "TrailStep",
 ]
+
+
+async def complete_after_quiz_pass(
+    request: Request,
+    user: PublicUser,
+    activity: Activity,
+    course: Course,
+    db_session: AsyncSession,
+    *,
+    best_score: float,
+) -> bool:
+    """Called by the quiz service when the end quiz is passed. If the video is
+    already verified-complete the lesson finishes now; otherwise the pass is
+    remembered and the heartbeat engine finishes it when the video completes."""
+    progress = await _load_progress(user.id, activity.id, db_session, for_update=True)
+    if progress is None or progress.video_completed_at is None:
+        return False
+    if progress.completion_state == VideoProgressCompletionState.COMPLETE:
+        return True
+    ts = datetime.now(timezone.utc)
+    duration = float(progress.duration_seconds or 0)
+    state = _state_from_row(progress)
+    covered = pm.coverage_seconds(state.coverage, duration)
+    step_data = {
+        "videoComplete": True,
+        "verifiedWatchSeconds": round(state.verified_seconds, 2),
+        "coverageSeconds": round(covered, 2),
+        "coverageRatio": round(covered / duration, 4) if duration else 0.0,
+        "durationSeconds": duration,
+        "policyVersion": pm.POLICY_VERSION,
+        "bestQuizScore": best_score,
+        "quizPassed": True,
+        "completedAt": ts.isoformat(),
+        "completedBy": "video_quiz",
+    }
+    progress.completion_state = VideoProgressCompletionState.COMPLETE
+    progress.updated_at = ts
+    db_session.add(progress)
+    await db_session.commit()
+    try:
+        await complete_activity_for_user(request, user, activity, course, db_session, step_data=step_data, source="video_quiz")
+    except Exception:  # pragma: no cover
+        logger.exception("Completion side effects failed after quiz pass for %s", activity.activity_uuid)
+    return True

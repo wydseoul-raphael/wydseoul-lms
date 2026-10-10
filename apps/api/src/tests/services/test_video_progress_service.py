@@ -198,7 +198,17 @@ class TestHeartbeat:
 
     async def test_end_quiz_defers_trail_step(self, db, mock_request, regular_user, pass_gate, no_side_effects, video):
         complete, _ = no_side_effects
-        video.details = {**video.details, "endQuiz": {"enabled": True}}
+        # A required end quiz lives in the quiz table; details.endQuiz is only a mirror.
+        from src.db.courses.video_quiz import VideoQuiz
+
+        db.add(
+            VideoQuiz(
+                video_quiz_uuid="videoquiz_test", org_id=video.org_id, course_id=video.course_id, activity_id=video.id,
+                questions=[{"id": "e1", "kind": "end", "type": "single", "prompt": {"en": "Q"}, "options": [{"id": "a", "text": {"en": "A"}}]}],
+                answer_key={"e1": ["a"]}, settings={"end_quiz_required": True, "pass_score": 100}, version=1,
+            )
+        )
+        video.details = {**video.details, "endQuiz": {"enabled": True, "count": 1}}
         db.add(video)
         await db.commit()
         sid = (await _start(mock_request, regular_user, db))["sessionId"]

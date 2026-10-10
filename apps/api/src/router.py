@@ -9,7 +9,7 @@ from src.routers import demo as demo_router_module
 from src.routers import instance
 from src.routers import plans
 from src.routers import usergroups
-from src.routers import dev, trail, video_progress, users, auth, orgs, roles, search
+from src.routers import dev, trail, video_progress, video_quiz, users, auth, orgs, roles, search
 from src.routers import mfa as mfa_router_module
 from src.routers import monitoring
 from src.routers import nudges as nudges_router_module
@@ -273,6 +273,12 @@ v1_router.include_router(
     video_progress.router,
     prefix="/video-progress",
     tags=["video-progress"],
+    dependencies=[Depends(require_authenticated_user)]
+)
+v1_router.include_router(
+    video_quiz.router,
+    prefix="/video-quiz",
+    tags=["video-quiz"],
     dependencies=[Depends(require_authenticated_user)]
 )
 v1_router.include_router(
