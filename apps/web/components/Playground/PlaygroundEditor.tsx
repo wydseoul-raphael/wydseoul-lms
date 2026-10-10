@@ -62,13 +62,13 @@ const EditorLearnHouseLogo = () => {
     () => logoAnimations[Math.floor(Math.random() * logoAnimations.length)]
   )
   return (
-    <div className="bg-black rounded-md w-[25px] h-[25px] flex items-center justify-center overflow-hidden flex-shrink-0">
+    <div className="bg-white ring-1 ring-black/10 rounded-md w-[25px] h-[25px] flex items-center justify-center overflow-hidden flex-shrink-0">
       <motion.div
         initial={animation.initial}
         animate={animation.animate}
         transition={animation.transition}
       >
-        <Image src="/lrn.svg" alt="LearnHouse" width={14} height={14} className="invert" />
+        <Image src="/wyd/wyd-emblem.svg" alt="WYD SEOUL 2027" width={14} height={14} />
       </motion.div>
     </div>
   )

@@ -712,18 +712,17 @@ const EditorLearnHouseLogo = () => {
   )
 
   return (
-    <div className="bg-black rounded-md w-[25px] h-[25px] flex items-center justify-center overflow-hidden">
+    <div className="bg-white ring-1 ring-black/10 rounded-md w-[25px] h-[25px] flex items-center justify-center overflow-hidden">
       <motion.div
         initial={animation.initial}
         animate={animation.animate}
         transition={animation.transition}
       >
         <Image
-          src="/lrn.svg"
-          alt="LearnHouse"
+          src="/wyd/wyd-emblem.svg"
+          alt="WYD SEOUL 2027"
           width={14}
           height={14}
-          className="invert"
         />
       </motion.div>
     </div>

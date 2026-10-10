@@ -123,4 +123,4 @@ class TestWhiteLabelTranslations:
 
     def test_powered_by_line_exists_everywhere(self):
         for lang in SUPPORTED_LANGUAGES:
-            assert "LearnHouse" in EMAIL_TRANSLATIONS[lang]["common.powered_by"]
+            assert "WYD SEOUL 2027" in EMAIL_TRANSLATIONS[lang]["common.powered_by"]

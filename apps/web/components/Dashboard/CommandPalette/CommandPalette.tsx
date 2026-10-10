@@ -251,7 +251,7 @@ export default function CommandPalette() {
                 />
               </div>
               <img
-                src="/lrn-dash.svg"
+                src="/wyd/wyd-emblem.svg"
                 alt=""
                 aria-hidden="true"
                 draggable={false}

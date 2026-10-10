@@ -100,10 +100,9 @@ function DashMobileMenu() {
             aria-label={t('common.home')}
           >
             <img
-              src="/lrn-dash.svg"
-              alt="LearnHouse"
-              className="h-[18px] w-[18px] opacity-60 hover:opacity-90 transition-opacity"
-              style={{ filter: 'brightness(0) invert(1)' }}
+              src="/wyd/wyd-emblem.svg"
+              alt="WYD SEOUL 2027"
+              className="h-[18px] w-[18px] opacity-90 hover:opacity-100 transition-opacity"
             />
           </Link>
           {/* Progressive reveal: more icons as viewport widens */}
@@ -194,8 +193,8 @@ function DashMobileMenu() {
                     <OrgSquareLogo org={org} wideInsetClassName="p-0.5" fallback={null} />
                   </div>
                 ) : (
-                  <div className="h-7 w-7 flex items-center justify-center bg-white/[0.06] rounded-lg">
-                    <img src="/lrn-dash.svg" alt="LearnHouse" className="h-4 w-4" style={{ filter: 'brightness(0) invert(1)' }} />
+                  <div className="h-7 w-7 flex items-center justify-center bg-white rounded-lg">
+                    <img src="/wyd/wyd-emblem.svg" alt="WYD SEOUL 2027" className="h-5 w-5" />
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
