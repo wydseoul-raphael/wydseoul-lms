@@ -44,11 +44,11 @@
     "help": "Trợ giúp",
     "help_menu": {
       "documentation": "Tài liệu",
-      "website": "Trang web LearnHouse",
+      "website": "Trang web WYD SEOUL 2027",
       "discord": "Discord",
       "report_feedback": "Báo cáo vấn đề hoặc phản hồi",
       "feedback_title": "Gửi Phản hồi",
-      "feedback_description": "Giúp chúng tôi cải thiện LearnHouse bằng cách chia sẻ suy nghĩ, báo cáo lỗi hoặc đề xuất tính năng mới.",
+      "feedback_description": "Giúp chúng tôi cải thiện WYD SEOUL 2027 bằng cách chia sẻ suy nghĩ, báo cáo lỗi hoặc đề xuất tính năng mới.",
       "feedback_placeholder": "Cho chúng tôi biết bạn đang nghĩ gì...",
       "feedback_success": "Cảm ơn phản hồi của bạn!",
       "send_feedback": "Gửi Phản hồi",
@@ -215,7 +215,7 @@
     "organizations": "Tổ chức",
     "billing": "Thanh toán",
     "create_organization": "Tạo tổ chức",
-    "copyright": "© {{year}} LearnHouse, Inc.",
+    "copyright": "© {{year}} WYD SEOUL 2027, Inc.",
     "delete_organization_error": "Không thể xóa tổ chức này. Vui lòng thử lại.",
     "org_actions": "Thao tác tổ chức",
     "manage_upgrade": "Quản lý / Nâng cấp",
@@ -371,11 +371,11 @@
     "privacy_policy": "Chính sách Bảo mật",
     "image_title_forgot": "Đặt lại mật khẩu của bạn.",
     "image_subtitle_forgot": "Chúng tôi sẽ giúp bạn nhanh chóng truy cập lại tài khoản.",
-    "image_title_login": "Chào mừng trở lại với LearnHouse.",
+    "image_title_login": "Chào mừng trở lại với WYD SEOUL 2027.",
     "image_subtitle_login": "Tiếp tục từ nơi bạn dừng lại: các khóa học, học viên và công cụ của bạn đang chờ.",
     "image_title_reset": "Sắp xong rồi.",
     "image_subtitle_reset": "Tạo một mật khẩu mạnh để giữ tài khoản của bạn an toàn.",
-    "image_title_signup": "Bắt đầu giảng dạy cùng LearnHouse.",
+    "image_title_signup": "Bắt đầu giảng dạy cùng WYD SEOUL 2027.",
     "image_subtitle_signup": "Tạo tài khoản và ra mắt khóa học đầu tiên của bạn chỉ trong vài phút.",
     "image_title_verify": "Xác minh email của bạn.",
     "image_subtitle_verify": "Một bước nhanh gọn để bảo mật tài khoản và bắt đầu.",
@@ -2352,8 +2352,8 @@
         "label_placeholder": "Chọn một nhãn tổ chức",
         "about": "Giới thiệu tổ chức",
         "about_placeholder": "Mô tả chi tiết về tổ chức của bạn",
-        "showcase_explore": "Hiển thị trong LearnHouse Explore",
-        "showcase_description": "Chia sẻ các khóa học và nội dung của tổ chức bạn với cộng đồng LearnHouse. Bật tính năng này để giúp người học khám phá các tài nguyên giáo dục giá trị.",
+        "showcase_explore": "Hiển thị trong WYD SEOUL 2027 Explore",
+        "showcase_description": "Chia sẻ các khóa học và nội dung của tổ chức bạn với cộng đồng WYD SEOUL 2027. Bật tính năng này để giúp người học khám phá các tài nguyên giáo dục giá trị.",
         "save_changes": "Lưu thay đổi",
         "saving": "Đang lưu...",
         "update_success": "Thông tin tổ chức đã được cập nhật",
@@ -2364,9 +2364,9 @@
         "footer_text_desc": "Văn bản tùy chỉnh hiển thị ở cuối các trang của tổ chức",
         "default_language": "Ngôn ngữ mặc định",
         "default_language_desc": "Ngôn ngữ mà khách truy cập mới sẽ thấy theo mặc định và được dùng cho các email gửi thay mặt tổ chức này. Thành viên vẫn có thể thay đổi ngôn ngữ giao diện của mình.",
-        "watermark_desc": "Hiển thị watermark thương hiệu LearnHouse trên các trang tổ chức của bạn",
+        "watermark_desc": "Hiển thị watermark thương hiệu WYD SEOUL 2027 trên các trang tổ chức của bạn",
         "watermark_free_plan": "Watermark luôn được hiển thị trên gói miễn phí",
-        "watermark_label": "Watermark \"Made with LearnHouse\"",
+        "watermark_label": "Watermark \"Made with WYD SEOUL 2027\"",
         "watermark_ee": "Bị ẩn bởi giấy phép Enterprise Edition của bạn"
       },
       "images": {
@@ -4823,7 +4823,7 @@
       },
       "teach_the_world": {
         "title": "Học hỏi & phát triển",
-        "description": "Tài nguyên giúp bạn tận dụng tối đa LearnHouse.",
+        "description": "Tài nguyên giúp bạn tận dụng tối đa WYD SEOUL 2027.",
         "classroom": "Lớp học",
         "classroom_desc": "Tìm hiểu cách phát triển và quản lý khóa học",
         "university": "Đại học LearnHouse",
@@ -4856,7 +4856,7 @@
       }
     },
     "welcome": {
-      "title": "Chào mừng đến với LearnHouse",
+      "title": "Chào mừng đến với WYD SEOUL 2027",
       "subtitle": "Tạo khóa học, mời học viên và chia sẻ kiến thức với thế giới.",
       "get_started": "Bắt đầu",
       "features_title": "Mọi thứ bạn cần",
@@ -5156,7 +5156,7 @@
   "embed": {
     "not_supported_description": "Loại hoạt động này yêu cầu xác thực và không thể được nhúng.",
     "not_supported_title": "Hoạt động này không được hỗ trợ",
-    "powered_by": "Cung cấp bởi LearnHouse",
+    "powered_by": "Cung cấp bởi WYD SEOUL 2027",
     "visit_activity": "Truy cập trang hoạt động"
   },
   "migration": {
@@ -5661,7 +5661,7 @@
         "title": "Muốn dùng thử?",
         "body": "Hãy đến",
         "link": "trang Nhà phát triển",
-        "suffix": "để trải nghiệm LearnHouse."
+        "suffix": "để trải nghiệm WYD SEOUL 2027."
       },
       "validation": {
         "required": "Bắt buộc",

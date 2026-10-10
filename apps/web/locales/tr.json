@@ -44,11 +44,11 @@
     "help": "Yardım",
     "help_menu": {
       "documentation": "Dokümantasyon",
-      "website": "LearnHouse Web Sitesi",
+      "website": "WYD SEOUL 2027 Web Sitesi",
       "discord": "Discord",
       "report_feedback": "Sorun veya Geri Bildirim Bildir",
       "feedback_title": "Geri Bildirim Gönder",
-      "feedback_description": "Düşüncelerinizi paylaşarak, hata bildirerek veya yeni özellikler önererek LearnHouse'u geliştirmemize yardımcı olun.",
+      "feedback_description": "Düşüncelerinizi paylaşarak, hata bildirerek veya yeni özellikler önererek WYD SEOUL 2027'u geliştirmemize yardımcı olun.",
       "feedback_placeholder": "Aklınızdakileri bize söyleyin...",
       "feedback_success": "Geri bildiriminiz için teşekkürler!",
       "send_feedback": "Geri Bildirim Gönder",
@@ -215,7 +215,7 @@
     "organizations": "Organizasyonlar",
     "billing": "Faturalandırma",
     "create_organization": "Organizasyon oluştur",
-    "copyright": "© {{year}} LearnHouse, Inc.",
+    "copyright": "© {{year}} WYD SEOUL 2027, Inc.",
     "delete_organization_error": "Bu organizasyon silinemedi. Lütfen tekrar deneyin.",
     "org_actions": "Organizasyon işlemleri",
     "manage_upgrade": "Yönet / Yükselt",
@@ -375,17 +375,17 @@
     "verifying_email": "E-posta adresiniz doğrulanıyor...",
     "error_generic": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
     "sign_in": "Giriş Yap",
-    "terms_text": "Devam ederek LearnHouse'un",
+    "terms_text": "Devam ederek WYD SEOUL 2027'un",
     "terms_of_service": "Hizmet Şartları",
     "and": "ve",
     "privacy_policy": "Gizlilik Politikası",
     "image_title_forgot": "Şifrenizi sıfırlayın.",
     "image_subtitle_forgot": "Kısa sürede hesabınıza yeniden erişmenize yardımcı olacağız.",
-    "image_title_login": "LearnHouse'a tekrar hoş geldiniz.",
+    "image_title_login": "WYD SEOUL 2027'a tekrar hoş geldiniz.",
     "image_subtitle_login": "Kaldığınız yerden devam edin; kurslarınız, öğrencileriniz ve araçlarınız sizi bekliyor.",
     "image_title_reset": "Neredeyse tamam.",
     "image_subtitle_reset": "Hesabınızı güvende tutmak için güçlü bir şifre oluşturun.",
-    "image_title_signup": "LearnHouse ile eğitime başlayın.",
+    "image_title_signup": "WYD SEOUL 2027 ile eğitime başlayın.",
     "image_subtitle_signup": "Hesabınızı oluşturun ve ilk kursunuzu dakikalar içinde yayınlayın.",
     "image_title_verify": "E-postanızı doğrulayın.",
     "image_subtitle_verify": "Hesabınızı güvene almak ve başlamak için tek bir hızlı adım.",
@@ -2352,8 +2352,8 @@
         "label_placeholder": "Bir organizasyon etiketi seçin",
         "about": "Organizasyon Hakkında",
         "about_placeholder": "Organizasyonunuzun detaylı açıklaması",
-        "showcase_explore": "LearnHouse Explore'da göster",
-        "showcase_description": "Organizasyonunuzun kurslarını ve içeriklerini LearnHouse topluluğuyla paylaşın. Öğrencilerin değerli eğitim kaynaklarını keşfetmelerine yardımcı olmak için bunu etkinleştirin.",
+        "showcase_explore": "WYD SEOUL 2027 Explore'da göster",
+        "showcase_description": "Organizasyonunuzun kurslarını ve içeriklerini WYD SEOUL 2027 topluluğuyla paylaşın. Öğrencilerin değerli eğitim kaynaklarını keşfetmelerine yardımcı olmak için bunu etkinleştirin.",
         "save_changes": "Değişiklikleri Kaydet",
         "saving": "Kaydediliyor...",
         "update_success": "Organizasyon bilgileri güncellendi",
@@ -2364,9 +2364,9 @@
         "footer_text_desc": "Kuruluş sayfalarınızın altında görüntülenen özel metin",
         "default_language": "Varsayılan dil",
         "default_language_desc": "Yeni ziyaretçilerin varsayılan olarak gördüğü ve bu kuruluş adına gönderilen e-postalarda kullanılan dil. Üyeler kendi arayüz dillerini değiştirmeye devam edebilir.",
-        "watermark_desc": "Organizasyon sayfalarınızda LearnHouse marka filigranını gösterin",
+        "watermark_desc": "Organizasyon sayfalarınızda WYD SEOUL 2027 marka filigranını gösterin",
         "watermark_free_plan": "Filigran ücretsiz planda her zaman gösterilir",
-        "watermark_label": "\"Made with LearnHouse\" filigranı",
+        "watermark_label": "\"Made with WYD SEOUL 2027\" filigranı",
         "watermark_ee": "Enterprise Edition lisansınız tarafından gizlendi"
       },
       "images": {
@@ -4823,7 +4823,7 @@
       },
       "teach_the_world": {
         "title": "Öğrenin ve büyüyün",
-        "description": "LearnHouse'dan en iyi şekilde yararlanmanıza yardımcı olacak kaynaklar.",
+        "description": "WYD SEOUL 2027'dan en iyi şekilde yararlanmanıza yardımcı olacak kaynaklar.",
         "classroom": "Sınıf",
         "classroom_desc": "Kurslarınızı nasıl büyüteceğinizi ve yöneteceğinizi öğrenin",
         "university": "LearnHouse Üniversitesi",
@@ -4856,7 +4856,7 @@
       }
     },
     "welcome": {
-      "title": "LearnHouse'a hoş geldiniz",
+      "title": "WYD SEOUL 2027'a hoş geldiniz",
       "subtitle": "Kurslar oluşturun, öğrencileri davet edin ve bilgiyi dünyayla paylaşın.",
       "get_started": "Başla",
       "features_title": "İhtiyacınız olan her şey",
@@ -5156,7 +5156,7 @@
   "embed": {
     "not_supported_description": "Bu tür etkinlik kimlik doğrulama gerektirir ve yerleştirilemez.",
     "not_supported_title": "Bu etkinlik desteklenmiyor",
-    "powered_by": "LearnHouse tarafından desteklenmektedir",
+    "powered_by": "WYD SEOUL 2027 tarafından desteklenmektedir",
     "visit_activity": "Etkinlik Sayfasını Ziyaret Et"
   },
   "migration": {
@@ -5669,7 +5669,7 @@
         "title": "Denemek mi istiyorsunuz?",
         "body": "Şuraya gidin:",
         "link": "Geliştiriciler sayfası",
-        "suffix": "ve LearnHouse'u deneyin."
+        "suffix": "ve WYD SEOUL 2027'u deneyin."
       },
       "validation": {
         "required": "Zorunlu",

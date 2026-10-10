@@ -46,11 +46,11 @@
     "help": "सहायता",
     "help_menu": {
       "documentation": "दस्तावेज़ीकरण",
-      "website": "LearnHouse वेबसाइट",
+      "website": "WYD SEOUL 2027 वेबसाइट",
       "discord": "Discord",
       "report_feedback": "समस्या या फीडबैक रिपोर्ट करें",
       "feedback_title": "फीडबैक भेजें",
-      "feedback_description": "अपने विचार साझा करके, बग रिपोर्ट करके, या नई सुविधाओं का सुझाव देकर LearnHouse को बेहतर बनाने में हमारी मदद करें।",
+      "feedback_description": "अपने विचार साझा करके, बग रिपोर्ट करके, या नई सुविधाओं का सुझाव देकर WYD SEOUL 2027 को बेहतर बनाने में हमारी मदद करें।",
       "feedback_placeholder": "हमें बताएं कि आप क्या सोच रहे हैं...",
       "feedback_success": "आपके फीडबैक के लिए धन्यवाद!",
       "send_feedback": "फीडबैक भेजें",
@@ -215,7 +215,7 @@
     "organizations": "संगठन",
     "billing": "बिलिंग",
     "create_organization": "संगठन बनाएँ",
-    "copyright": "© {{year}} LearnHouse, Inc.",
+    "copyright": "© {{year}} WYD SEOUL 2027, Inc.",
     "delete_organization_error": "यह संगठन नहीं हटाया जा सका। कृपया पुनः प्रयास करें।",
     "org_actions": "संगठन की क्रियाएँ",
     "manage_upgrade": "प्रबंधित करें / अपग्रेड करें",
@@ -375,17 +375,17 @@
     "verifying_email": "आपका ईमेल पता सत्यापित किया जा रहा है...",
     "error_generic": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
     "sign_in": "साइन इन करें",
-    "terms_text": "जारी रखते हुए, आप LearnHouse की",
+    "terms_text": "जारी रखते हुए, आप WYD SEOUL 2027 की",
     "terms_of_service": "सेवा की शर्तें",
     "and": "और",
     "privacy_policy": "गोपनीयता नीति",
     "image_title_forgot": "अपना पासवर्ड रीसेट करें।",
     "image_subtitle_forgot": "हम आपको कुछ ही समय में आपके खाते में वापस लाने में मदद करेंगे।",
-    "image_title_login": "LearnHouse में फिर से स्वागत है।",
+    "image_title_login": "WYD SEOUL 2027 में फिर से स्वागत है।",
     "image_subtitle_login": "जहाँ छोड़ा था वहीं से जारी रखें: आपके कोर्स, छात्र और टूल आपका इंतज़ार कर रहे हैं।",
     "image_title_reset": "बस थोड़ा और।",
     "image_subtitle_reset": "अपने खाते को सुरक्षित रखने के लिए एक मज़बूत पासवर्ड बनाएँ।",
-    "image_title_signup": "LearnHouse के साथ सिखाना शुरू करें।",
+    "image_title_signup": "WYD SEOUL 2027 के साथ सिखाना शुरू करें।",
     "image_subtitle_signup": "अपना खाता बनाएँ और कुछ ही मिनटों में अपना पहला कोर्स लॉन्च करें।",
     "image_title_verify": "अपना ईमेल सत्यापित करें।",
     "image_subtitle_verify": "अपने खाते को सुरक्षित करने और शुरू करने के लिए एक त्वरित कदम।",
@@ -2362,9 +2362,9 @@
         "footer_text_desc": "आपके संगठन के पृष्ठों के नीचे प्रदर्शित कस्टम टेक्स्ट",
         "default_language": "डिफ़ॉल्ट भाषा",
         "default_language_desc": "नए विज़िटर को डिफ़ॉल्ट रूप से दिखाई देने वाली भाषा और इस संस्था की ओर से भेजे जाने वाले ईमेल में उपयोग की जाने वाली भाषा। सदस्य अब भी अपनी UI भाषा बदल सकते हैं।",
-        "watermark_desc": "अपने संगठन के पेजों पर LearnHouse ब्रांडिंग वॉटरमार्क दिखाएं",
+        "watermark_desc": "अपने संगठन के पेजों पर WYD SEOUL 2027 ब्रांडिंग वॉटरमार्क दिखाएं",
         "watermark_free_plan": "फ्री प्लान पर वॉटरमार्क हमेशा दिखाया जाता है",
-        "watermark_label": "\"Made with LearnHouse\" वॉटरमार्क",
+        "watermark_label": "\"Made with WYD SEOUL 2027\" वॉटरमार्क",
         "watermark_ee": "आपके एंटरप्राइज़ संस्करण लाइसेंस द्वारा छिपाया गया"
       },
       "images": {
@@ -5077,7 +5077,7 @@
       },
       "teach_the_world": {
         "title": "सीखें और बढ़ें",
-        "description": "LearnHouse से अधिकतम लाभ उठाने में मदद करने के लिए संसाधन।",
+        "description": "WYD SEOUL 2027 से अधिकतम लाभ उठाने में मदद करने के लिए संसाधन।",
         "classroom": "क्लासरूम",
         "classroom_desc": "अपने कोर्स को बढ़ाना और प्रबंधित करना सीखें",
         "university": "LearnHouse विश्वविद्यालय",
@@ -5110,7 +5110,7 @@
       }
     },
     "welcome": {
-      "title": "LearnHouse में आपका स्वागत है",
+      "title": "WYD SEOUL 2027 में आपका स्वागत है",
       "subtitle": "कोर्स बनाएं, शिक्षार्थियों को आमंत्रित करें और दुनिया के साथ ज्ञान साझा करें।",
       "get_started": "शुरू करें",
       "features_title": "आपको जो चाहिए वो सब",
@@ -5154,7 +5154,7 @@
   "embed": {
     "not_supported_description": "इस प्रकार की गतिविधि के लिए प्रमाणीकरण आवश्यक है और इसे एम्बेड नहीं किया जा सकता।",
     "not_supported_title": "यह गतिविधि समर्थित नहीं है",
-    "powered_by": "Powered by LearnHouse",
+    "powered_by": "Powered by WYD SEOUL 2027",
     "visit_activity": "गतिविधि पेज पर जाएं"
   },
   "migration": {
@@ -5659,7 +5659,7 @@
         "title": "परीक्षण करना चाहते हैं?",
         "body": "जाएँ",
         "link": "डेवलपर पेज",
-        "suffix": "पर और इसके बजाय LearnHouse आज़माएँ।"
+        "suffix": "पर और इसके बजाय WYD SEOUL 2027 आज़माएँ।"
       },
       "validation": {
         "required": "आवश्यक",

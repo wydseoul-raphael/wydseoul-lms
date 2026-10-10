@@ -7,6 +7,7 @@ import pytest
 
 from src.db.organizations import OrganizationRead
 from src.db.users import UserRead
+from src.services.users.emails import LOGO_SVG  # platform wordmark
 from src.services.users.emails import (
     send_account_creation_email,
     send_account_deleted_email,
@@ -88,8 +89,8 @@ class TestEmailsService:
         call = send_email.call_args.kwargs
         assert "https://platform.test/organizations" in call["body"]
         # Org-less keeps the LearnHouse-branded subject + Academy footer, no org logo.
-        assert "Welcome to LearnHouse" in call["subject"]
-        assert "LearnHouse Academy" in call["body"]
+        assert "Welcome to WYD SEOUL 2027" in call["subject"]
+        assert "WYD SEOUL 2027 Academy" in call["body"]
         assert "<img" not in call["body"]
 
     def test_welcome_is_whitelabeled_when_org_supplied(self):
@@ -104,11 +105,11 @@ class TestEmailsService:
         call = send_email.call_args.kwargs
         # Subject/body name the org (html-escaped), not LearnHouse.
         assert "Acme &amp; Co" in call["subject"]
-        assert "Welcome to LearnHouse" not in call["subject"]
+        assert "Welcome to WYD SEOUL 2027" not in call["subject"]
         assert "Acme &amp; Co" in call["body"]
         # Org logo replaces the mark; Academy link is gone; powered-by remains.
         assert '<img src="https://api.test/content/orgs/org_uuid/logos/logo.png"' in call["body"]
-        assert "LearnHouse Academy" not in call["body"]
+        assert "WYD SEOUL 2027 Academy" not in call["body"]
         assert "Powered by WYD SEOUL 2027" in call["body"]
         assert "https://acme.test/home" in call["body"]
 
@@ -120,7 +121,7 @@ class TestEmailsService:
         call = send_email.call_args.kwargs
         # No org logo → the org's own name up top, never the LearnHouse mark.
         assert "<img" not in call["body"]
-        assert "<svg" not in call["body"]
+        assert LOGO_SVG not in call["body"]
         assert _wordmark("Acme &amp; Co") in call["body"]
         assert "Acme &amp; Co" in call["subject"]
         assert "Powered by WYD SEOUL 2027" in call["body"]
@@ -183,7 +184,7 @@ class TestEmailsService:
             )
         call = send_email.call_args.kwargs
         assert "<img" not in call["body"]
-        assert "<svg" not in call["body"]
+        assert LOGO_SVG not in call["body"]
         assert _wordmark("Acme") in call["body"]
 
     def test_org_join_email_translates(self):
@@ -566,7 +567,7 @@ class TestWhiteLabel:
         for call in self._all_org_scoped_sends(**self.BRANDING):
             assert "LearnHouse" not in call["body"], call["subject"]
             assert "LearnHouse" not in call["subject"]
-            assert "<svg" not in call["body"]
+            assert LOGO_SVG not in call["body"]
             assert f'<img src="{self.LOGO}" alt="Acme &amp; Co"' in call["body"]
             assert call["sender_name"] == "Acme Academy"
 
@@ -608,7 +609,7 @@ class TestWhiteLabel:
         for call in self._all_org_scoped_sends(powered_by=False):
             assert _wordmark("Acme &amp; Co") in call["body"], call["subject"]
             assert "<img" not in call["body"]
-            assert "<svg" not in call["body"]
+            assert LOGO_SVG not in call["body"]
             assert "background-color: #000000;" in call["body"]
 
     def test_invalid_brand_color_keeps_the_default_button(self):
@@ -662,11 +663,11 @@ class TestWhiteLabel:
             send_account_deleted_email("user@test.com", "user")
         for call in sent.call_args_list:
             body = call.kwargs["body"]
-            assert "<svg" in body, call.kwargs["subject"]
+            assert LOGO_SVG in body, call.kwargs["subject"]
             assert "Powered by WYD SEOUL 2027" not in body
             assert "#ff5500" not in body
         verification_body = sent.call_args_list[1].kwargs["body"]
-        assert "welcome to LearnHouse!" in verification_body
+        assert "welcome to WYD SEOUL 2027!" in verification_body
 
     def test_translated_whitelabel_copy_has_no_unfilled_placeholders(self):
         from src.services.auth.magic_login import send_magic_login_email

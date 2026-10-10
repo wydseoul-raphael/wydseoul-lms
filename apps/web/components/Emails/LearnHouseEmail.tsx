@@ -11,6 +11,8 @@ import {
   Text,
 } from '@react-email/components'
 import * as React from 'react'
+import { getUriWithoutOrg } from '@services/config/config'
+import { WYD_BRAND } from '@/lib/wyd/brand'
 
 // Shared transactional email layout (React Email). One flexible template drives
 // every message (welcome, purchase, plan change, payment failed, etc.) via an

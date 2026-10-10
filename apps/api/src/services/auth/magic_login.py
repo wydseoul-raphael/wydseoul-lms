@@ -117,6 +117,7 @@ def send_magic_login_email(
     from src.services.email.translations import t
     from src.services.users.emails import (
         LOGO_SVG,
+        PLATFORM_BRAND_NAME,
         STYLES,
         _brand_logo_html,
         _button_style,

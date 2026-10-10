@@ -46,11 +46,11 @@
     "help": "Aiuto",
     "help_menu": {
       "documentation": "Documentazione",
-      "website": "Sito web LearnHouse",
+      "website": "Sito web WYD SEOUL 2027",
       "discord": "Discord",
       "report_feedback": "Segnala problema o feedback",
       "feedback_title": "Invia Feedback",
-      "feedback_description": "Aiutaci a migliorare LearnHouse condividendo i tuoi pensieri, segnalando bug o suggerendo nuove funzionalità.",
+      "feedback_description": "Aiutaci a migliorare WYD SEOUL 2027 condividendo i tuoi pensieri, segnalando bug o suggerendo nuove funzionalità.",
       "feedback_placeholder": "Dicci cosa pensi...",
       "feedback_success": "Grazie per il tuo feedback!",
       "send_feedback": "Invia Feedback",
@@ -215,7 +215,7 @@
     "organizations": "Organizzazioni",
     "billing": "Fatturazione",
     "create_organization": "Crea organizzazione",
-    "copyright": "© {{year}} LearnHouse, Inc.",
+    "copyright": "© {{year}} WYD SEOUL 2027",
     "delete_organization_error": "Impossibile eliminare questa organizzazione. Riprova.",
     "org_actions": "Azioni dell’organizzazione",
     "manage_upgrade": "Gestisci / Aggiorna",
@@ -358,12 +358,12 @@
     "privacy_policy": "l’Informativa sulla privacy",
     "image_title_forgot": "Reimposta la password.",
     "image_subtitle_forgot": "Ti aiutiamo a rientrare nel tuo account in un attimo.",
-    "image_title_login": "Bentornato su LearnHouse.",
-    "image_subtitle_login": "Riprendi da dove avevi lasciato: i tuoi corsi, gli studenti e gli strumenti ti aspettano.",
+    "image_title_login": "Bentornato in WYD SEOUL 2027.",
+    "image_subtitle_login": "Riprendi da dove avevi lasciato. La tua formazione e i tuoi progressi ti aspettano.",
     "image_title_reset": "Ci sei quasi.",
     "image_subtitle_reset": "Crea una password robusta per mantenere sicuro il tuo account.",
-    "image_title_signup": "Inizia a insegnare con LearnHouse.",
-    "image_subtitle_signup": "Crea il tuo account e lancia il tuo primo corso in pochi minuti.",
+    "image_title_signup": "Crea il tuo account di formazione per volontari.",
+    "image_subtitle_signup": "Unisciti al centro di formazione online dei volontari WYD SEOUL 2027 e inizia la formazione obbligatoria.",
     "image_title_verify": "Verifica la tua email.",
     "image_subtitle_verify": "Un rapido passaggio per proteggere il tuo account e iniziare.",
     "turnstile_failed": "Verifica non riuscita. Riprova.",
@@ -2340,9 +2340,9 @@
         "footer_text_desc": "Testo personalizzato visualizzato in fondo alle pagine della tua organizzazione",
         "default_language": "Lingua predefinita",
         "default_language_desc": "La lingua mostrata per impostazione predefinita ai nuovi visitatori e usata per le email inviate per conto di questa organizzazione. I membri possono comunque cambiare la propria lingua dell'interfaccia.",
-        "watermark_desc": "Mostra il watermark LearnHouse sulle pagine della tua organizzazione",
+        "watermark_desc": "Mostra il watermark WYD SEOUL 2027 sulle pagine della tua organizzazione",
         "watermark_free_plan": "Il watermark è sempre mostrato nel piano gratuito",
-        "watermark_label": "Watermark \"Made with LearnHouse\"",
+        "watermark_label": "Watermark \"Made with WYD SEOUL 2027\"",
         "watermark_ee": "Nascosto dalla tua licenza Enterprise Edition"
       },
       "images": {
@@ -5055,7 +5055,7 @@
       },
       "teach_the_world": {
         "title": "Impara e cresci",
-        "description": "Risorse per aiutarti a ottenere il massimo da LearnHouse.",
+        "description": "Risorse per aiutarti a ottenere il massimo da WYD SEOUL 2027.",
         "classroom": "L'aula",
         "classroom_desc": "Impara a far crescere e gestire i tuoi corsi",
         "university": "Università LearnHouse",
@@ -5088,7 +5088,7 @@
       }
     },
     "welcome": {
-      "title": "Benvenuto su LearnHouse",
+      "title": "Benvenuto su WYD SEOUL 2027",
       "subtitle": "Crea corsi, invita studenti e condividi la conoscenza con il mondo.",
       "get_started": "Inizia",
       "features_title": "Tutto ciò di cui hai bisogno",
@@ -5132,7 +5132,7 @@
   "embed": {
     "not_supported_description": "Questo tipo di attività richiede l'autenticazione e non può essere incorporato.",
     "not_supported_title": "Questa attività non è supportata",
-    "powered_by": "Powered by LearnHouse",
+    "powered_by": "Powered by WYD SEOUL 2027",
     "visit_activity": "Visita la pagina dell'attività"
   },
   "migration": {
@@ -5637,7 +5637,7 @@
         "title": "Vuoi fare una prova?",
         "body": "Vai alla",
         "link": "pagina Sviluppatori",
-        "suffix": "per provare invece LearnHouse."
+        "suffix": "per provare invece WYD SEOUL 2027."
       },
       "validation": {
         "required": "Obbligatorio",

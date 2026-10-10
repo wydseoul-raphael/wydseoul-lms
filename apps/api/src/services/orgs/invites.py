@@ -422,7 +422,7 @@ async def send_invite_email(
 
         result = send_invitation_email(
             email=email,
-            org_name=sanitize_display_name(org.name, fallback="A LearnHouse organization"),
+            org_name=sanitize_display_name(org.name, fallback="A WYD SEOUL 2027 organization"),
             inviter_username=sanitize_display_name(user.username),
             invite_code=invite_code,
             signup_url=signup_url,

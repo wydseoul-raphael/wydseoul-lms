@@ -93,7 +93,7 @@ def strip_urls(value: Optional[str]) -> str:
     return re.sub(r"\s+", " ", cleaned).strip()
 
 
-def sanitize_display_name(value: Optional[str], *, fallback: str = "A LearnHouse user") -> str:
+def sanitize_display_name(value: Optional[str], *, fallback: str = "A WYD SEOUL 2027 user") -> str:
     """Return a link-free display name suitable for rendering into emails.
     Falls back to a neutral label if stripping leaves nothing meaningful."""
     cleaned = strip_urls(value)

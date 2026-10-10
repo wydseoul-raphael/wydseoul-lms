@@ -2,7 +2,8 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import learnhouseIcon from 'public/learnhouse_bigicon_1.png'
+import wydEmblem from 'public/wyd/wyd-emblem.png'
+import { WYD_BRAND } from '@/lib/wyd/brand'
 import { getOrgAuthBackgroundMediaDirectory } from '@services/media/media'
 import OrgSquareLogo from '@components/Objects/Org/OrgSquareLogo'
 import { getUriWithOrg } from '@services/config/config'
@@ -20,13 +21,13 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
     unsplash_photographer_url = '',
     unsplash_photo_url = '',
   } = authBranding
-  const UNSPLASH_UTM = '?utm_source=LearnHouse&utm_medium=referral'
+  const UNSPLASH_UTM = '?utm_source=WYD_SEOUL_2027&utm_medium=referral'
   const withUtm = (url: string) => (url ? `${url}${UNSPLASH_UTM}` : '')
 
   const getBackgroundStyle = (): React.CSSProperties => {
     if (background_type === 'gradient' || !background_image) {
       return {
-        background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
+        background: 'linear-gradient(041.61deg, #082b67 7.15%, #0047bb 90.96%)',
       }
     }
     if (background_type === 'custom' && background_image) {
@@ -44,7 +45,7 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
       }
     }
     return {
-      background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
+      background: 'linear-gradient(041.61deg, #082b67 7.15%, #0047bb 90.96%)',
     }
   }
 
@@ -69,9 +70,9 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
                 quality={100}
                 width={40}
                 height={40}
-                src={learnhouseIcon}
-                alt="LearnHouse"
-                className="object-contain"
+                src={wydEmblem}
+                alt={WYD_BRAND.name}
+                className="object-contain p-1"
               />
             }
           />
@@ -79,7 +80,7 @@ export default function AuthMobileHeader({ org }: AuthMobileHeaderProps) {
       </Link>
 
       <span className="relative z-10 font-semibold text-white text-lg truncate">
-        {org?.name || 'LearnHouse'}
+        {org?.name || WYD_BRAND.name}
       </span>
 
       {/* Unsplash attribution (required by Unsplash API guidelines) */}
