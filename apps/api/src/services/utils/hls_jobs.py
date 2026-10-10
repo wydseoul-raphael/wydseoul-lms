@@ -298,6 +298,7 @@ async def transcode_activity(activity_uuid: str) -> bool:
             activity_uuid, "ready",
             master=result["master"], renditions=result["renditions"],
             thumbnails=result.get("thumbnails"),
+            duration=result.get("duration") or None,
         )
         if client:
             try:

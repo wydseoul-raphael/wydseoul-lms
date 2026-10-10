@@ -107,3 +107,7 @@ class ActivityRead(ActivityBase):
     last_modified_by_username: Optional[str] = None
     # Computed per-request: true if current user cannot access this activity.
     is_locked: bool = False
+    # Why it is locked ("restricted" usergroup lock, "sequential" progression)
+    # and, for sequential locks, the activity that unlocks it.
+    lock_reason: Optional[str] = None
+    unlock_activity_uuid: Optional[str] = None

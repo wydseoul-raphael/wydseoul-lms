@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import LanguageSwitcher from '@components/Utils/LanguageSwitcher'
+import { WydLanguageSelect } from '@components/Wyd/WydLanguageSelect'
 import AuthBrandingPanel from '@components/Auth/AuthBrandingPanel'
 import AuthMobileHeader from '@components/Auth/AuthMobileHeader'
 import { AuthFooter } from '@components/Footers/LegalFooters'
@@ -36,7 +36,7 @@ export default function AuthLayout({ org, welcomeText, title, subtitle, children
           (z-10), otherwise the panel intercepts its clicks. `z-dropdown`
           resolves to z-index:auto here, so use a concrete z-50. */}
       <div className="absolute top-4 end-4 z-50">
-        <LanguageSwitcher />
+        <WydLanguageSelect />
       </div>
 
       {/* Mobile Header - visible only on small screens */}

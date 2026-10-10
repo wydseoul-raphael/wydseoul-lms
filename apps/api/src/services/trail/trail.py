@@ -5,7 +5,7 @@ from sqlmodel import select, func, delete as sql_delete
 from sqlmodel.ext.asyncio.session import AsyncSession
 from src.db.courses.chapter_activities import ChapterActivity
 from fastapi import HTTPException, Request, status
-from src.db.courses.activities import Activity
+from src.db.courses.activities import Activity, ActivityTypeEnum
 from src.db.courses.courses import Course
 from src.db.trail_runs import TrailRun, TrailRunRead
 from src.db.trail_steps import TrailStep
@@ -24,6 +24,8 @@ from src.services.webhooks.dispatch import dispatch_webhooks
 from src.security.rbac import check_resource_access, AccessAction
 from src.security.org_auth import require_org_membership
 from src.services.courses.activities.access import verify_activity_reader_access
+from src.services.courses.locks import is_org_admin
+from src.services.video_progress.video_content import is_verified_watch
 
 
 async def _build_trail_read(
@@ -95,7 +97,10 @@ async def _build_trail_read(
         for step in steps_by_run.get(tr.id, []):
             db_session.expunge(step)
             step_course = course_map.get(step.course_id)
-            step.data = {"course": step_course.model_dump() if step_course else None}
+            # Merge: the video engine stores completion facts in step.data
+            # (verified seconds, quiz score); the course summary is added, not
+            # swapped in over them.
+            step.data = {**(step.data or {}), "course": step_course.model_dump() if step_course else None}
             run.steps.append(step)
 
         trail_runs.append(run)
@@ -219,39 +224,24 @@ async def get_user_trail_with_orgid(
     return await _build_trail_read(trail, list(trail_runs_raw), db_session)
 
 
-async def add_activity_to_trail(
+async def complete_activity_for_user(
     request: Request,
-    user: PublicUser | AnonymousUser,
-    activity_uuid: str,
+    user: PublicUser,
+    activity: Activity,
+    course: Course,
     db_session: AsyncSession,
-) -> TrailRead:
-    if isinstance(user, AnonymousUser):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Anonymous users cannot access this endpoint",
-        )
+    *,
+    step_data: Optional[dict] = None,
+    source: str = "manual",
+) -> tuple[Trail, bool]:
+    """Record ``activity`` as completed for ``user`` and run every side effect
+    (analytics, audit, webhooks, certificate, enrollment status).
 
-    # Look for the activity
-    statement = select(Activity).where(Activity.activity_uuid == activity_uuid)
-    activity = (await db_session.execute(statement)).scalars().first()
-
-    if not activity:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Activity not found"
-        )
-
-    statement = select(Course).where(Course.id == activity.course_id)
-    course = (await db_session.execute(statement)).scalars().first()
-
-    if not course:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Course not found"
-        )
-
-    # Completing an activity leads to the certificate: only an activity the
-    # learner may actually consume (published, paid for, unlocked) counts.
-    await verify_activity_reader_access(request, activity, course, user, db_session)
-
+    Shared by the manual "mark as complete" path and the video watch engine,
+    so both produce identical TrailSteps and fire the same COURSE_COMPLETED
+    pipeline. Returns ``(trail, is_new_completion)``. The caller is
+    responsible for the access check.
+    """
     trail = await check_trail_presence(
         org_id=course.org_id,
         user_id=user.id,
@@ -294,6 +284,7 @@ async def add_activity_to_trail(
             complete=True,
             teacher_verified=False,
             grade="",
+            data=dict(step_data or {}),
             user_id=user.id,
             creation_date=str(datetime.now()),
             update_date=str(datetime.now()),
@@ -301,6 +292,13 @@ async def add_activity_to_trail(
         db_session.add(trailstep)
         await db_session.commit()
         await db_session.refresh(trailstep)
+    elif step_data:
+        # Re-completion with richer facts (e.g. quiz passed after the video):
+        # keep the step, enrich its data.
+        trailstep.data = {**(trailstep.data or {}), **step_data}
+        trailstep.update_date = str(datetime.now())
+        db_session.add(trailstep)
+        await db_session.commit()
 
     # Only track on first completion to avoid duplicates on re-visits
     if is_new_completion:
@@ -309,16 +307,17 @@ async def add_activity_to_trail(
             org_id=course.org_id,
             user_id=user.id,
             properties={
-                "activity_uuid": activity_uuid,
+                "activity_uuid": activity.activity_uuid,
                 "course_uuid": course.course_uuid,
                 "activity_type": activity.activity_type if activity.activity_type else "",
+                "source": source,
             },
         )
         await record_audit_event(
             event_type=UserAuditEventType.ACTIVITY_COMPLETED,
             user_id=user.id,
             org_id=course.org_id,
-            target_uuid=activity_uuid,
+            target_uuid=activity.activity_uuid,
             metadata={
                 "course_uuid": course.course_uuid,
                 "course_name": course.name,
@@ -330,7 +329,7 @@ async def add_activity_to_trail(
             org_id=course.org_id,
             data={
                 "user": {"user_uuid": user.user_uuid, "email": user.email, "username": user.username},
-                "activity": {"activity_uuid": activity_uuid, "activity_type": activity.activity_type or ""},
+                "activity": {"activity_uuid": activity.activity_uuid, "activity_type": activity.activity_type or ""},
                 "course": {"course_uuid": course.course_uuid, "name": course.name},
             },
         )
@@ -388,6 +387,62 @@ async def add_activity_to_trail(
                 "course": {"course_uuid": course.course_uuid, "name": course.name},
             },
         )
+
+    return trail, is_new_completion
+
+
+async def add_activity_to_trail(
+    request: Request,
+    user: PublicUser | AnonymousUser,
+    activity_uuid: str,
+    db_session: AsyncSession,
+) -> TrailRead:
+    if isinstance(user, AnonymousUser):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Anonymous users cannot access this endpoint",
+        )
+
+    # Look for the activity
+    statement = select(Activity).where(Activity.activity_uuid == activity_uuid)
+    activity = (await db_session.execute(statement)).scalars().first()
+
+    if not activity:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Activity not found"
+        )
+
+    statement = select(Course).where(Course.id == activity.course_id)
+    course = (await db_session.execute(statement)).scalars().first()
+
+    if not course:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Course not found"
+        )
+
+    # Completing an activity leads to the certificate: only an activity the
+    # learner may actually consume (published, paid for, unlocked) counts.
+    await verify_activity_reader_access(request, activity, course, user, db_session)
+
+    # Verified-watch videos complete through the heartbeat engine only; the
+    # manual "mark as complete" button must not be a way around 90 % viewing.
+    # Org admins keep the override for support cases.
+    if (
+        activity.activity_type == ActivityTypeEnum.TYPE_VIDEO
+        and is_verified_watch(activity.details)
+        and not await is_org_admin(user.id, course.org_id, db_session)
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "code": "VIDEO_REQUIRES_VERIFIED_WATCH",
+                "message": "This video is completed by watching it; it cannot be marked complete manually.",
+            },
+        )
+
+    trail, _ = await complete_activity_for_user(
+        request, user, activity, course, db_session, source="manual"
+    )
 
     statement = select(TrailRun).where(TrailRun.trail_id == trail.id, TrailRun.user_id == user.id)
     trail_runs_raw = (await db_session.execute(statement)).scalars().all()

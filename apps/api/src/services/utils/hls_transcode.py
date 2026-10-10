@@ -384,4 +384,6 @@ async def transcode_source_to_hls(src_path: str, out_dir: str) -> Optional[dict]
         "master": MASTER_PLAYLIST_NAME,
         "renditions": [r.name for r in rungs],
         "thumbnails": thumbnails,
+        # ffprobe's container duration: the trusted length for watch verification.
+        "duration": round(float(duration or 0.0), 3),
     }
