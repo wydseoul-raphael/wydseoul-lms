@@ -15,6 +15,7 @@ import {
 } from '@services/courses/activities'
 import { useLHSession } from '@components/Contexts/LHSessionContext'
 import toast from 'react-hot-toast'
+import VideoPlaybackConfigPanel from '@components/Objects/Activities/Video/VideoPlaybackConfigPanel'
 import { mutate } from 'swr'
 
 const SUPPORTED_FILES = constructAcceptValue(['mp4', 'webm'])
@@ -334,6 +335,8 @@ function EditVideoActivityModal({ activity, onClose }: EditVideoActivityModalPro
           </label>
         </div>
       </div>
+
+      <VideoPlaybackConfigPanel activity={activity} />
 
       {!isYouTube && (
         <div className="space-y-2">

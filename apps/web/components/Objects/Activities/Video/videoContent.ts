@@ -57,7 +57,7 @@ export function extractVimeo(value: string | null | undefined): { videoId: strin
   if (/^\d{5,15}$/.test(raw)) return { videoId: raw }
   const m = raw.match(/vimeo\.com\/(?:video\/)?(\d{5,15})(?:\/([A-Za-z0-9]{6,32}))?/)
   if (!m) return { videoId: '' }
-  let hash = m[2]
+  let hash: string | undefined = m[2]
   if (!hash) {
     const h = raw.match(/[?&]h=([A-Za-z0-9]{6,32})/)
     hash = h ? h[1] : undefined

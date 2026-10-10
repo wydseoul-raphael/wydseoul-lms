@@ -182,7 +182,7 @@ function ActivityActions({ activity, activityid, course, orgslug, assignment, sh
     <div className="flex space-x-2 items-center">
       {activity && activity.published == true && activity.content.paid_access != false && (
         <AuthenticatedClientElement checkMethod="authentication">
-          {activity.activity_type != 'TYPE_ASSIGNMENT' && (
+          {activity.activity_type != 'TYPE_ASSIGNMENT' && !(activity.activity_type === 'TYPE_VIDEO' && activity.details?.verifiedWatch) && (
             <>
               <MarkStatus
                 activity={activity}
@@ -517,11 +517,21 @@ function ActivityClient(props: ActivityClientProps) {
             {t('course.locked_title', 'This activity is locked')}
           </h1>
           <p className="text-sm text-gray-500 mb-6 leading-relaxed">
-            {isAuthenticated
-              ? t('course.locked_restricted', 'You need to be a member of the right user group to access this. Ask a course admin to add you.')
-              : t('course.locked_auth_required', 'You need to sign in to access this activity.')}
+            {activity.lock_reason === 'sequential'
+              ? t('activities.video_engine.locked_sequential', 'Complete the previous lesson to unlock this one.')
+              : isAuthenticated
+                ? t('course.locked_restricted', 'You need to be a member of the right user group to access this. Ask a course admin to add you.')
+                : t('course.locked_auth_required', 'You need to sign in to access this activity.')}
           </p>
           <div className="flex flex-col sm:flex-row gap-2 justify-center">
+            {activity.lock_reason === 'sequential' && activity.unlock_activity_uuid && (
+              <Link
+                href={getUriWithOrg(orgslug, `/course/${course?.course_uuid?.replace('course_', '')}/activity/${String(activity.unlock_activity_uuid).replace('activity_', '')}`)}
+                className="inline-flex items-center justify-center px-4 py-2 bg-wyd-blue text-white rounded-lg text-sm font-semibold hover:bg-wyd-blue-dark transition-colors"
+              >
+                {t('activities.video_engine.go_to_unlock', 'Go to the previous lesson')}
+              </Link>
+            )}
             {!isAuthenticated && (
               <Link
                 href={getUriWithOrg(orgslug, '/login')}

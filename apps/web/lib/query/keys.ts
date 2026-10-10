@@ -27,6 +27,11 @@ export const queryKeys = {
   trail: {
     org: (orgId: number) => ['trail', 'org', orgId] as const,
   },
+  videoProgress: {
+    activity: (activityUuid: string) => ['videoProgress', 'activity', activityUuid] as const,
+    course: (courseUuid: string) => ['videoProgress', 'course', courseUuid] as const,
+    admin: (courseUuid: string, params: string) => ['videoProgress', 'admin', courseUuid, params] as const,
+  },
   folders: {
     list: (orgId: number) => ['folders', orgId] as const,
     detail: (uuid: string) => ['folder', uuid] as const,

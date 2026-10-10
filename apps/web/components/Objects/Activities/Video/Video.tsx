@@ -2,6 +2,8 @@ import React from 'react'
 import YouTube from 'react-youtube'
 import { useOrg } from '@components/Contexts/OrgContext'
 import LearnHousePlayer from './LearnHousePlayer'
+import VerifiedVideoPlayer from './VerifiedVideoPlayer'
+import { isVerifiedWatch } from './videoContent'
 import {
   isActivityHlsReady,
   resolveActivityVideoSource,
@@ -73,6 +75,18 @@ function VideoActivity({ activity, course, orgUuid }: VideoActivityProps) {
       activityUuid: activity.activity_uuid,
       filename: activity.content?.filename,
     })
+
+  // Verified-watch videos (WYD policy) render the engine player: custom
+  // control bar, restricted seeking, server heartbeats, failover sources.
+  if (activity && isVerifiedWatch(activity.details as any)) {
+    return (
+      <div className="w-full max-w-full px-0 sm:px-4">
+        <div className="my-0 sm:my-3 md:my-5 w-full">
+          <VerifiedVideoPlayer activity={activity} course={course} orgUuid={resolvedOrgUuid} />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="w-full max-w-full px-0 sm:px-4">
