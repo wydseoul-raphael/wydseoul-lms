@@ -1618,6 +1618,100 @@
     "minutes_ago": "منذ {{count}} دقائق"
   },
   "dashboard": {
+    "learning_management": {
+      "title": "Learning management",
+      "subtitle": "Mandatory training completion across volunteers",
+      "keywords": "completion, required courses, progress, deadline, 이수",
+      "empty": "No data yet",
+      "pagination": "{{from}}–{{to}} of {{total}}",
+      "status": {
+        "completed": "Completed",
+        "in_progress": "In progress",
+        "not_started": "Not started"
+      },
+      "kpi": {
+        "members": "Members",
+        "required_courses": "Required courses",
+        "completed_all": "Completed all required",
+        "at_risk": "At risk",
+        "dau": "Active today",
+        "enrolled": "Enrolled",
+        "started": "Started",
+        "completed": "Completed",
+        "avg_watch_time": "Avg verified watch time"
+      },
+      "funnel": {
+        "title": "Required training funnel",
+        "members": "Members",
+        "enrolled_any": "Enrolled in a required course",
+        "completed_any": "Completed a required course",
+        "completed_all": "Completed all required courses"
+      },
+      "dau": {
+        "title": "Daily active learners (30 days)"
+      },
+      "required_courses": {
+        "title": "Courses",
+        "course": "Course",
+        "type": "Type",
+        "deadline": "Deadline",
+        "days_left": "{{n}} days left",
+        "overdue": "Overdue",
+        "enrolled": "Enrolled",
+        "completed": "Completed",
+        "rate": "Completion",
+        "required": "Required",
+        "optional": "Optional"
+      },
+      "at_risk": {
+        "title": "Learners at risk",
+        "help": "Not finished with required training and inactive for {{days}}+ days, or behind the pace their deadline implies.",
+        "none": "Nobody is at risk right now",
+        "days_inactive": "Inactive days",
+        "reason": "Reason",
+        "reason_inactive": "Inactive",
+        "reason_behind_pace": "Behind pace",
+        "last_active": "Last active",
+        "never_active": "Never active",
+        "progress": "Required done",
+        "expected": "expected"
+      },
+      "course": {
+        "subtitle": "Who watched what, quiz scores and completion",
+        "tabs": {
+          "learners": "Learners",
+          "activities": "Activities"
+        },
+        "filters": {
+          "all": "All statuses",
+          "search_placeholder": "Search name or email…"
+        },
+        "columns": {
+          "learner": "Learner",
+          "status": "Status",
+          "progress": "Progress",
+          "certificate": "Certificate"
+        },
+        "activities": {
+          "completion_title": "Completions per activity"
+        },
+        "dropoff": {
+          "title": "Where learners stop",
+          "help": "Furthest verified position per learner, by 10% of the video."
+        }
+      },
+      "learner": {
+        "required_courses": "Required courses done",
+        "all_required_completed": "All required training completed",
+        "certificates": "Certificates",
+        "courses": "Courses",
+        "certificate": "View certificate"
+      },
+      "export": {
+        "csv": "Export CSV",
+        "downloading": "Downloading…"
+      }
+    },
     "nav": {
       "sidebar_navigation": "شريط التنقل الجانبي للوحة التحكم",
       "mobile_navigation": "تنقل لوحة التحكم للجوال",
@@ -1703,6 +1797,14 @@
       "includes_purchased": "يشمل {{count}} مشتراة"
     },
     "courses": {
+      "wyd": {
+        "title": "WYD learning settings",
+        "sequential": "Sequential progression",
+        "sequential_help": "Each lesson unlocks only after the previous one is completed (verified video / passed quiz).",
+        "required": "Required course (counts toward mandatory training)",
+        "required_help": "Required courses appear in the completion dashboard and trigger the logistics notification when all are done.",
+        "deadline": "Completion deadline"
+      },
       "title": "الدورات",
       "rights_guide": "دليل الحقوق",
       "create_course": "إنشاء دورة",

@@ -1493,6 +1493,100 @@
     "minutes_ago": "{{count}}분 전"
   },
   "dashboard": {
+    "learning_management": {
+      "title": "이수관리",
+      "subtitle": "봉사자 필수 교육 이수 현황",
+      "keywords": "이수, 필수 교육, 진도, 마감, completion",
+      "empty": "아직 데이터가 없습니다",
+      "pagination": "{{total}}명 중 {{from}}–{{to}}",
+      "status": {
+        "completed": "완료",
+        "in_progress": "진행 중",
+        "not_started": "시작 전"
+      },
+      "kpi": {
+        "members": "회원",
+        "required_courses": "필수 과정",
+        "completed_all": "필수 전체 이수",
+        "at_risk": "관리 필요",
+        "dau": "오늘 활동",
+        "enrolled": "수강 신청",
+        "started": "학습 시작",
+        "completed": "완료",
+        "avg_watch_time": "평균 검증 시청시간"
+      },
+      "funnel": {
+        "title": "필수 교육 퍼널",
+        "members": "회원",
+        "enrolled_any": "필수 과정 수강 중",
+        "completed_any": "필수 과정 1개 이상 완료",
+        "completed_all": "필수 과정 전체 완료"
+      },
+      "dau": {
+        "title": "일별 활동 학습자 (30일)"
+      },
+      "required_courses": {
+        "title": "과정",
+        "course": "과정",
+        "type": "구분",
+        "deadline": "마감일",
+        "days_left": "{{n}}일 남음",
+        "overdue": "기한 초과",
+        "enrolled": "수강",
+        "completed": "완료",
+        "rate": "이수율",
+        "required": "필수",
+        "optional": "선택"
+      },
+      "at_risk": {
+        "title": "관리가 필요한 학습자",
+        "help": "필수 교육을 마치지 않았고 {{days}}일 이상 미접속이거나, 마감일 기준 페이스보다 뒤처진 학습자입니다.",
+        "none": "현재 관리가 필요한 학습자가 없습니다",
+        "days_inactive": "미접속 기준(일)",
+        "reason": "사유",
+        "reason_inactive": "장기 미접속",
+        "reason_behind_pace": "진도 지연",
+        "last_active": "최근 활동",
+        "never_active": "활동 없음",
+        "progress": "필수 완료",
+        "expected": "기대치"
+      },
+      "course": {
+        "subtitle": "학습자별 시청·퀴즈·완료 현황",
+        "tabs": {
+          "learners": "학습자",
+          "activities": "차시"
+        },
+        "filters": {
+          "all": "전체 상태",
+          "search_placeholder": "이름 또는 이메일 검색…"
+        },
+        "columns": {
+          "learner": "학습자",
+          "status": "상태",
+          "progress": "진도",
+          "certificate": "수료증"
+        },
+        "activities": {
+          "completion_title": "차시별 완료 인원"
+        },
+        "dropoff": {
+          "title": "이탈 지점",
+          "help": "학습자별 검증된 최대 시청 위치를 영상의 10% 구간으로 나눈 분포입니다."
+        }
+      },
+      "learner": {
+        "required_courses": "필수 과정 완료",
+        "all_required_completed": "필수 교육 전체 이수",
+        "certificates": "수료증",
+        "courses": "과정",
+        "certificate": "수료증 보기"
+      },
+      "export": {
+        "csv": "CSV 내보내기",
+        "downloading": "다운로드 중…"
+      }
+    },
     "home": {
       "cards": {
         "courses": {
@@ -1562,6 +1656,14 @@
       "includes_purchased": "구매한 {{count}}개 포함"
     },
     "courses": {
+      "wyd": {
+        "title": "WYD 학습 설정",
+        "sequential": "순차 진행",
+        "sequential_help": "이전 차시를 완료(영상 검증 시청 / 퀴즈 통과)해야 다음 차시가 열립니다.",
+        "required": "필수 과정 (이수관리 대상)",
+        "required_help": "필수 과정은 이수관리 대시보드에 집계되고, 전부 완료되면 물류시스템 알림이 전송됩니다.",
+        "deadline": "이수 마감일"
+      },
       "title": "코스",
       "rights_guide": "권한 가이드",
       "create_course": "코스 생성",
