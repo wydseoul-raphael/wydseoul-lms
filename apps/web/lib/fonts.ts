@@ -40,7 +40,9 @@ export const CURATED_FONTS = [
   'Work Sans',
 ]
 
-export const DEFAULT_FONT = 'Wix Madefor Text'
+// Matches the `--font-default` face loaded in app/layout.tsx; an org whose
+// custom font equals this value gets no extra stylesheet injected.
+export const DEFAULT_FONT = 'Inter'
 
 export function getGoogleFontUrl(fontFamily: string): string {
   const encoded = fontFamily.replace(/ /g, '+')

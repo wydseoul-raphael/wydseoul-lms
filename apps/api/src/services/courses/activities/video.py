@@ -427,10 +427,14 @@ async def configure_captions(
 
     from sqlalchemy.orm.attributes import flag_modified
 
+    from src.services.courses.activities.video_admin import merge_manual_languages
+
     meta = dict(activity.extra_metadata or {})
     captions = dict(meta.get("captions") or {})
+    # Volunteer-uploaded (manual) tracks survive an AI reconfiguration.
+    langs = merge_manual_languages(list(captions.get("languages") or []), langs)
     captions.update({
-        "enabled": config.enabled,
+        "enabled": config.enabled or any(l.get("source") == "manual" for l in langs),
         "auto_generate": True,
         "source_language": src,
         "languages": langs,

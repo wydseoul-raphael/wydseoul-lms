@@ -60,7 +60,7 @@ class TestProvisioningURI:
     def test_contains_issuer_and_account(self):
         uri = build_provisioning_uri(generate_totp_secret(), "learner@example.com")
         assert uri.startswith("otpauth://totp/")
-        assert "issuer=LearnHouse" in uri
+        assert "issuer=WYD%20SEOUL%202027" in uri
         assert "learner%40example.com" in uri
 
 

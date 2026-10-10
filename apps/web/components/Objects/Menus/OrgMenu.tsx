@@ -48,6 +48,7 @@ import {
   TooltipTrigger,
 } from '@components/ui/tooltip'
 import { useLHAnalytics, AnalyticsEvent } from '@services/analytics'
+import { WYD_BRAND } from '@/lib/wyd/brand'
 
 export const OrgMenu = (props: any) => {
   const orgslug = props.orgslug
@@ -557,14 +558,18 @@ const CopilotMenuButton = ({
   )
 }
 
-const LearnHouseLogo = ({ logoFilter }: { logoFilter: string }) => {
+// Fallback brand mark when the org has not uploaded its own logo. The WYD logo
+// is full-colour, so the primary-colour `logoFilter` (meant for the old
+// monochrome wordmark) is intentionally not applied.
+const LearnHouseLogo = (_props: { logoFilter: string }) => {
   return (
     <Image
-      src="/lrn-text.svg"
-      alt="LearnHouse logo"
-      width={133}
-      height={40}
-      style={{ height: 'auto', filter: logoFilter }}
+      src={WYD_BRAND.assets.logoSmall}
+      alt={WYD_BRAND.name}
+      width={WYD_BRAND.logoSize.width}
+      height={WYD_BRAND.logoSize.height}
+      style={{ height: '100%', width: 'auto' }}
+      priority
     />
   )
 }

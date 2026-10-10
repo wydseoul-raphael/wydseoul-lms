@@ -17,7 +17,7 @@ export interface HeartbeatPayload {
 export type HeartbeatDraft = Omit<HeartbeatPayload, 'seq'>
 
 export interface HeartbeatQueueOptions {
-  send: (_payload: HeartbeatPayload, _opts: { keepalive: boolean }) => Promise<unknown>
+  send: (_payload: HeartbeatPayload, _options: { keepalive: boolean }) => Promise<unknown>
   onResult?: (_result: unknown, _payload: HeartbeatPayload) => void
   onError?: (_error: unknown, _payload: HeartbeatPayload) => void
 }
@@ -62,8 +62,7 @@ export class HeartbeatQueue {
       this.pending = null
       const payload: HeartbeatPayload = { ...draft, seq: ++this.seq }
       let attempt = 0
-      // eslint-disable-next-line no-constant-condition
-      while (true) {
+      for (;;) {
         try {
           const result = await this.opts.send(payload, { keepalive })
           this.consecutiveErrors = 0

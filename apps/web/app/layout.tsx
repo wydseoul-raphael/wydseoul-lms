@@ -1,15 +1,28 @@
 import '../styles/globals.css'
 import React from 'react'
+import type { Metadata } from 'next'
 import Providers from '@components/Providers'
-import { Wix_Madefor_Text, Tajawal } from 'next/font/google'
+import { Inter, Noto_Sans_KR, Tajawal } from 'next/font/google'
+import { WYD_BRAND } from '@/lib/wyd/brand'
 
-const wixMadeforText = Wix_Madefor_Text({
+// Latin/base face. Korean glyphs fall through to Noto Sans KR via the font
+// stack in globals.css (`--font-default` first, then `--font-kr`).
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-default',
 })
 
-// Wix Madefor Text has no Arabic subset, so Arabic would otherwise fall back to
+// Korean companion face: the learning center is operated from Seoul and ko is
+// a first-class UI language, so Hangul must not depend on the OS fallback.
+const notoSansKr = Noto_Sans_KR({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  display: 'swap',
+  variable: '--font-kr',
+})
+
+// Inter has no Arabic subset, so Arabic would otherwise fall back to
 // whatever the OS provides (Geeza Pro, Segoe UI, Noto) and look like a
 // different product on every platform.
 //
@@ -28,6 +41,26 @@ const tajawal = Tajawal({
   variable: '--font-arabic',
 })
 
+// Root metadata: WYD branding for every page that does not set its own.
+// Org-level `generateMetadata` (favicon_image, per-page titles) still wins
+// when present.
+export const metadata: Metadata = {
+  title: { default: WYD_BRAND.appName, template: '%s' },
+  description: WYD_BRAND.description,
+  applicationName: WYD_BRAND.name,
+  manifest: WYD_BRAND.assets.manifest,
+  icons: {
+    icon: [
+      { url: WYD_BRAND.assets.icon(32), sizes: '32x32', type: 'image/png' },
+      { url: WYD_BRAND.assets.icon(192), sizes: '192x192', type: 'image/png' },
+      { url: WYD_BRAND.assets.emblem, type: 'image/svg+xml' },
+    ],
+    apple: WYD_BRAND.assets.appleTouchIcon,
+    shortcut: WYD_BRAND.assets.favicon,
+  },
+  openGraph: { siteName: WYD_BRAND.name },
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -39,7 +72,7 @@ export default function RootLayout({
   // no-JS baseline for crawlers; the script overwrites it for everyone else.
   return (
     <html
-      className={`${wixMadeforText.variable} ${tajawal.variable}`}
+      className={`${inter.variable} ${notoSansKr.variable} ${tajawal.variable}`}
       lang="en"
       suppressHydrationWarning
     >

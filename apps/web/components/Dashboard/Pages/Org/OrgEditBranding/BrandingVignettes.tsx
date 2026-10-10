@@ -204,9 +204,9 @@ export function LoginPanelVignette({
           {scrim && <span className="absolute inset-0 bg-black/30" />}
           {showLearnHouseMark && (
             <img
-              src="/lrn.svg"
+              src="/wyd/wyd-emblem.webp"
               alt=""
-              className={cn('absolute', large ? 'top-3 start-3 h-4' : 'top-1.5 start-1.5 h-2', light ? 'opacity-60 invert' : 'opacity-40')}
+              className={cn('absolute', large ? 'top-3 start-3 h-4' : 'top-1.5 start-1.5 h-2', light ? 'opacity-90' : 'opacity-80')}
             />
           )}
           <div className={cn('relative z-10 flex h-full flex-col items-center justify-center text-center', large ? 'gap-3 px-6' : 'gap-1.5 px-3', light ? 'text-white' : 'text-gray-900')}>

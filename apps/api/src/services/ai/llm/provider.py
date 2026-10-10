@@ -91,7 +91,7 @@ def build_model(model_name: str) -> Model:
             model_name,
             provider=OpenRouterProvider(
                 api_key=api_key,
-                app_title=getattr(lh_config, "site_name", None) or "LearnHouse",
+                app_title=getattr(lh_config, "site_name", None) or "WYD SEOUL 2027",
             ),
         )
 

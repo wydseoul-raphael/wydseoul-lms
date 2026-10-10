@@ -10,6 +10,7 @@ import { AlertTriangle } from 'lucide-react';
 import * as Form from '@radix-ui/react-form';
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import ThumbnailUpdate from './ThumbnailUpdate';
+import WydCourseSettingsCard from './WydCourseSettingsCard';
 import { useCourseFieldSync } from '@components/Contexts/CourseContext';
 import FormTagInput from '@components/Objects/StyledElements/Form/TagInput';
 import LearningItemsList from './LearningItemsList';
@@ -122,10 +123,13 @@ function EditCourseGeneral(props: EditCourseStructureProps) {
       tags: courseStructure?.tags || '',
       public: courseStructure?.public || false,
       thumbnail_type: thumbnailType,
+      // WYD learning-management settings live in the course's JSON metadata
+      // (no schema change): progression mode + required/deadline flags.
+      extra_metadata: courseStructure?.extra_metadata || {},
     };
   }, [courseStructure?.name, courseStructure?.description, courseStructure?.about,
       courseStructure?.learnings, courseStructure?.tags, courseStructure?.public,
-      courseStructure?.thumbnail_type, initializeLearnings]);
+      courseStructure?.thumbnail_type, courseStructure?.extra_metadata, initializeLearnings]);
 
   const formik = useFormik({
     initialValues,
@@ -335,6 +339,12 @@ function EditCourseGeneral(props: EditCourseStructureProps) {
                   <ThumbnailUpdate thumbnailType={formik.values.thumbnail_type} />
                 </Form.Control>
               </FormField>
+
+              <WydCourseSettingsCard
+                value={formik.values.extra_metadata || {}}
+                disabled={isSaving}
+                onChange={(next) => formik.setFieldValue('extra_metadata', next)}
+              />
             </div>
           </FormLayout>
         </div>

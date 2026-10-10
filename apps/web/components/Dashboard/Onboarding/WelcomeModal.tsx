@@ -147,10 +147,9 @@ export default function WelcomeModal() {
                 >
                   <div className="px-10 pt-10 pb-2 text-center">
                     <motion.img
-                      src="/lrn-dash.svg"
-                      alt="LearnHouse"
+                      src="/wyd/wyd-emblem.svg"
+                      alt="WYD SEOUL 2027"
                       className="h-12 w-12 mx-auto mb-5"
-                      style={{ filter: 'brightness(0)' }}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.5, ease }}

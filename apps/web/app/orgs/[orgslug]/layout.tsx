@@ -43,7 +43,7 @@ export default async function RootLayout(props: {
     <div>
       <OrgProvider orgslug={params.orgslug}>
         <OrgLanguageSync />
-        <NextTopLoader color="#2e2e2e" initialPosition={0.3} height={4} easing={'ease'} speed={500} showSpinner={false} />
+        <NextTopLoader color="#0047bb" initialPosition={0.3} height={4} easing={'ease'} speed={500} showSpinner={false} />
         <Toast />
         <CompleteSignupFields />
         {props.children}

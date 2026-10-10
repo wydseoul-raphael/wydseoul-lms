@@ -257,11 +257,9 @@ function DashLeftMenu() {
               <OrgSquareLogo org={org} wideInsetClassName="p-1" fallback={null} />
             </div>
           ) : (
-            <img
-              src="/lrn-dash.svg"
-              alt="Learnhouse logo"
-              className="h-8 w-8"
-            />
+            <div className="h-8 w-8 rounded-lg bg-white p-0.5 shrink-0">
+              <img src="/wyd/wyd-emblem.svg" alt="WYD SEOUL 2027" className="h-full w-full object-contain" />
+            </div>
           )}
           {!isCollapsed && (
             <div className="flex flex-col min-w-0">

@@ -27,6 +27,25 @@ export const queryKeys = {
   trail: {
     org: (orgId: number) => ['trail', 'org', orgId] as const,
   },
+  videoProgress: {
+    activity: (activityUuid: string) => ['videoProgress', 'activity', activityUuid] as const,
+    course: (courseUuid: string) => ['videoProgress', 'course', courseUuid] as const,
+    admin: (courseUuid: string, params: string) => ['videoProgress', 'admin', courseUuid, params] as const,
+  },
+  videoQuiz: {
+    learner: (activityUuid: string) => ['videoQuiz', 'learner', activityUuid] as const,
+    admin: (activityUuid: string) => ['videoQuiz', 'admin', activityUuid] as const,
+    stats: (activityUuid: string) => ['videoQuiz', 'stats', activityUuid] as const,
+  },
+  learningManagement: {
+    overview: (orgId: number, days: number) => ['lm', orgId, 'overview', days] as const,
+    atRisk: (orgId: number, params: string) => ['lm', orgId, 'atRisk', params] as const,
+    courses: (orgId: number) => ['lm', orgId, 'courses'] as const,
+    learners: (orgId: number, params: string) => ['lm', orgId, 'learners', params] as const,
+    learner: (orgId: number, userUuid: string) => ['lm', orgId, 'learner', userUuid] as const,
+    courseSummary: (orgId: number, courseUuid: string) => ['lm', orgId, 'course', courseUuid, 'summary'] as const,
+    courseLearners: (orgId: number, courseUuid: string, params: string) => ['lm', orgId, 'course', courseUuid, 'learners', params] as const,
+  },
   folders: {
     list: (orgId: number) => ['folders', orgId] as const,
     detail: (uuid: string) => ['folder', uuid] as const,

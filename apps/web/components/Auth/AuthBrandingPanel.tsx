@@ -2,7 +2,8 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import learnhouseIcon from 'public/learnhouse_bigicon_1.png'
+import wydEmblem from 'public/wyd/wyd-emblem.png'
+import { WYD_BRAND } from '@/lib/wyd/brand'
 import { getOrgAuthBackgroundMediaDirectory } from '@services/media/media'
 import OrgSquareLogo from '@components/Objects/Org/OrgSquareLogo'
 import { getUriWithOrg } from '@services/config/config'
@@ -29,7 +30,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
     unsplash_photographer_url = '',
     unsplash_photo_url = '',
   } = authBranding
-  const UNSPLASH_UTM = '?utm_source=LearnHouse&utm_medium=referral'
+  const UNSPLASH_UTM = '?utm_source=WYD_SEOUL_2027&utm_medium=referral'
   const withUtm = (url: string) => (url ? `${url}${UNSPLASH_UTM}` : '')
 
   // Check if org has enterprise plan - hide LearnHouse branding for enterprise users
@@ -43,16 +44,12 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
   const getBackgroundStyle = (): React.CSSProperties => {
     if (noOrg) {
-      return {
-        backgroundImage: 'url(/auth-default.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }
+      return { background: 'linear-gradient(041.61deg, #082b67 7.15%, #0047bb 90.96%)' }
     }
     if (background_type === 'gradient' || !background_image) {
-      // Keep the original black gradient
+      // WYD navy → blue gradient
       return {
-        background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
+        background: 'linear-gradient(041.61deg, #082b67 7.15%, #0047bb 90.96%)',
       }
     }
     if (background_type === 'custom' && background_image) {
@@ -70,15 +67,15 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
       }
     }
     return {
-      background: 'linear-gradient(041.61deg, #202020 7.15%, #000000 90.96%)',
+      background: 'linear-gradient(041.61deg, #082b67 7.15%, #0047bb 90.96%)',
     }
   }
 
   const displayMessage = welcome_message || welcomeText || ''
   // No-org platform copy (defaults mirror the platform login illustration).
-  const noOrgTitle = title || 'Welcome back to LearnHouse.'
+  const noOrgTitle = title || `Welcome back to ${WYD_BRAND.name}.`
   const noOrgSubtitle =
-    subtitle || 'Pick up where you left off. Your courses, students, and tools are waiting.'
+    subtitle || 'Pick up where you left off. Your training and progress are waiting.'
   // Treat the no-org illustration like a photo background: dark scrim, no
   // blueprint-grid overlay.
   const hasCustomBackground = noOrg || (background_type !== 'gradient' && background_image)
@@ -142,20 +139,17 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
         {/* Content */}
         <div className="relative z-10 flex flex-col h-full p-10">
-          {/* Top bar with LearnHouse lrn.svg logo - hidden for enterprise users
-              and for the no-org apex panel (platform shows no logo on the image). */}
+          {/* Top bar with the WYD emblem - hidden for enterprise users and for
+              the no-org apex panel. */}
           {!isEnterprise && !noOrg && (
             <div className="login-topbar">
-              <Link prefetch href="https://learnhouse.app" target="_blank">
+              <Link prefetch href={getUriWithOrg(org?.slug, '/')}>
                 <img
-                  src="/lrn.svg"
-                  alt="LearnHouse"
+                  src={WYD_BRAND.assets.emblem}
+                  alt={WYD_BRAND.name}
                   width={30}
                   height={30}
-                  className={cn(
-                    "transition-opacity hover:opacity-100",
-                    text_color === 'light' ? "opacity-60 invert" : "opacity-40"
-                  )}
+                  className="transition-opacity opacity-90 hover:opacity-100"
                 />
               </Link>
             </div>
@@ -191,9 +185,9 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
                             quality={100}
                             width={96}
                             height={96}
-                            src={learnhouseIcon}
-                            alt="LearnHouse"
-                            className="object-contain"
+                            src={wydEmblem}
+                            alt={WYD_BRAND.name}
+                            className="object-contain p-2"
                           />
                         }
                       />
@@ -202,7 +196,7 @@ export default function AuthBrandingPanel({ org, welcomeText, title, subtitle }:
 
                   {/* Text content */}
                   <div className="space-y-1">
-                    <h1 className="font-black text-3xl tracking-tight">{org?.name || 'LearnHouse'}</h1>
+                    <h1 className="font-black text-3xl tracking-tight">{org?.name || WYD_BRAND.name}</h1>
                     {displayMessage && (
                       <p className={cn(
                         "text-lg max-w-sm leading-relaxed",

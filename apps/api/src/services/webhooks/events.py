@@ -41,6 +41,19 @@ WEBHOOK_EVENTS: dict[str, dict] = {
         "data_schema": {
             "user": {"user_uuid": "string", "email": "string", "username": "string"},
             "course": {"course_uuid": "string", "name": "string"},
+            "completed_at": "string",
+            "certificate": {"user_certification_uuid": "string"},
+            "required": "boolean",
+        },
+    },
+    "all_required_courses_completed": {
+        "category": "Learning Progress",
+        "description": "Triggered once when a learner has completed every course marked as required (mandatory training) — the hand-off to logistics/registration systems",
+        "data_schema": {
+            "user": {"user_uuid": "string", "email": "string", "username": "string"},
+            "courses": "list[object]",
+            "certificates": "list[string]",
+            "completed_at": "string",
         },
     },
     "course_enrolled": {

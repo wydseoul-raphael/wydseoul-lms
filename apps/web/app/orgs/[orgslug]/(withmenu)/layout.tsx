@@ -1,63 +1,25 @@
 'use client';
 import { use, useEffect, type ReactNode } from "react";
 import '@styles/globals.css'
-import Watermark from '@components/Objects/Watermark'
 import { SessionGate } from '@components/Contexts/LHSessionContext'
-import { OrgMenu } from '@components/Objects/Menus/OrgMenu'
 import { useOrg } from '@components/Contexts/OrgContext'
 import { OrgJoinBanner, OrgJoinBannerProvider } from '@components/Objects/Banners/OrgJoinBanner'
 import { OrgMFAPolicyGate } from '@components/Objects/Banners/OrgMFAPolicyGate'
 import { PodcastPlayerProvider } from '@components/Contexts/PodcastPlayerContext'
 import dynamic from 'next/dynamic'
 const PodcastPlayer = dynamic(() => import('@components/Objects/Podcasts/PodcastPlayer'), { ssr: false })
-import Image from 'next/image'
-import Link from 'next/link'
 import { PageViewTracker } from '@components/Analytics/PageViewTracker'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { usePlan } from '@components/Hooks/usePlan'
 import { getGoogleFontUrl, DEFAULT_FONT } from '@/lib/fonts'
+import { WydHeader } from '@components/Wyd/WydHeader'
+import { WydFooter } from '@components/Wyd/WydFooter'
 
-// Helper to convert hex to rgba
-const hexToRgba = (hex: string, alpha: number): string => {
-  if (!hex || hex.length < 7) return 'transparent'
-  const r = parseInt(hex.slice(1, 3), 16)
-  const g = parseInt(hex.slice(3, 5), 16)
-  const b = parseInt(hex.slice(5, 7), 16)
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`
-}
-
-function OrgFooter() {
-  const org = useOrg() as any
-  const footerText = org?.config?.config?.customization?.general?.footer_text || org?.config?.config?.general?.footer_text || ''
-  const plan = usePlan()
-  const watermarkConfig = org?.config?.config?.customization?.general?.watermark ?? org?.config?.config?.general?.watermark
-  const isFree = plan === 'free'
-  const showWatermark = isFree || watermarkConfig !== false
-
-  return (
-    <footer className="w-full py-8 mt-12">
-      <div className="flex flex-col items-center justify-center space-y-4">
-        {footerText && <p className="text-sm text-gray-500">{footerText}</p>}
-        {showWatermark && (
-          <Link href="https://learnhouse.app" target="_blank" rel="noopener noreferrer">
-            <Image
-              src="/lrn.svg"
-              alt="LearnHouse"
-              width={24}
-              height={24}
-              style={{ height: 'auto' }}
-              className="opacity-15 hover:opacity-40 transition-opacity duration-300 cursor-pointer"
-            />
-          </Link>
-        )}
-      </div>
-    </footer>
-  )
-}
-
+// Public shell of the WYD SEOUL 2027 learning center: WYD header + footer
+// around every (withmenu) route. The org's primary-colour tint is intentionally
+// not applied here (the brand palette is fixed in globals.css); the org's
+// custom font, if any, still is.
 function LayoutContent({ children, orgslug }: { children: ReactNode; orgslug: string }) {
   const org = useOrg() as any
-  const primaryColor = org?.config?.config?.customization?.general?.color || org?.config?.config?.general?.color || ''
   const customFont = org?.config?.config?.customization?.general?.font || org?.config?.config?.general?.font || ''
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -101,9 +63,13 @@ function LayoutContent({ children, orgslug }: { children: ReactNode; orgslug: st
 
   const pathParts = pathname?.split('/').filter(Boolean) || []
 
-  // Pages that use a full-bleed layout (no footer/watermark)
-  const noFooterPaths = ['copilot']
+  // Full-bleed pages: no footer. The guest preview is a self-contained dark
+  // stage with its own toolbar (exit link, brand, language), so it hides the
+  // header as well — a second bar on top would duplicate that chrome.
+  const noFooterPaths = ['copilot', 'preview']
+  const noHeaderPaths = ['preview']
   const isFullBleedPage = noFooterPaths.some((p) => pathParts.includes(p))
+  const hideHeader = noHeaderPaths.some((p) => pathParts.includes(p))
 
   return (
     <div
@@ -111,22 +77,20 @@ function LayoutContent({ children, orgslug }: { children: ReactNode; orgslug: st
       // font-family in Arabic, where Tajawal replaces the org's custom face
       // outright. An inline style beats any normal rule, so the override has to
       // target this element specifically.
-      className="lh-org-font-root flex flex-col min-h-screen"
+      className="lh-org-font-root flex flex-col min-h-screen bg-wyd-canvas text-wyd-ink"
       style={{
-        backgroundColor: primaryColor ? hexToRgba(primaryColor, 0.05) : 'transparent',
         ...(customFont ? { fontFamily: `'${customFont}', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif` } : {}),
       }}
     >
       <PageViewTracker />
       {!chromeless && <OrgJoinBanner />}
-      {!chromeless && <OrgMenu orgslug={orgslug} />}
+      {!chromeless && !hideHeader && <WydHeader orgslug={orgslug} />}
       {/* Org-wide 2FA policy: renders nothing unless this user is non-compliant. */}
       {!chromeless && <OrgMFAPolicyGate />}
-      <div className="flex-1 relative" style={{ zIndex: 'var(--z-content)' }}>
+      <div id="main" tabIndex={-1} className="flex-1 relative outline-none" style={{ zIndex: 'var(--z-content)' }}>
         {children}
       </div>
-      {!isFullBleedPage && !chromeless && <OrgFooter />}
-      {!isFullBleedPage && !chromeless && <Watermark />}
+      {!isFullBleedPage && !chromeless && <WydFooter orgslug={orgslug} />}
     </div>
   )
 }

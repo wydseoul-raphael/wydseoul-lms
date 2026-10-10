@@ -20,6 +20,12 @@ from src.db.courses.courses import Course
 from fastapi import HTTPException, status, Request
 from src.core.ee_hooks import check_ee_activity_paid_access
 from src.security.rbac import check_resource_access, AccessAction
+from src.services.courses.progression import (
+    completed_activity_ids,
+    course_is_sequential,
+    locked_activity_ids,
+    ordered_activity_ids,
+)
 from src.services.courses.locks import (
     batch_accessible_restricted_uuids,
     is_locked_for_user,
@@ -473,8 +479,35 @@ async def _apply_locks_to_chapters(
                 )
             activity.is_locked = activity_locked
             if activity_locked:
+                activity.lock_reason = "restricted"
                 activity.content = {}
                 activity.details = None
+
+    # Sequential progression: everything after the first incomplete activity
+    # is locked for learners. One ordering query + one TrailStep query for the
+    # whole tree, not per activity.
+    if course_is_sequential(course):
+        ordered = await ordered_activity_ids(course.id, db_session)
+        completed = (
+            await completed_activity_ids(acting_user_id, course.id, db_session)
+            if (not is_anon and acting_user_id)
+            else set()
+        )
+        locked_ids, unlock_by = locked_activity_ids(ordered, completed)
+        if locked_ids:
+            gate_uuid_by_id: dict[int, str] = {}
+            for chapter in chapters:
+                for activity in chapter.activities:
+                    gate_uuid_by_id[activity.id] = activity.activity_uuid
+            for chapter in chapters:
+                for activity in chapter.activities:
+                    if activity.id in locked_ids and not activity.is_locked:
+                        activity.is_locked = True
+                        activity.lock_reason = "sequential"
+                        gate = unlock_by.get(activity.id)
+                        activity.unlock_activity_uuid = gate_uuid_by_id.get(gate) if gate is not None else None
+                        activity.content = {}
+                        activity.details = None
 
 
 # Important Note : this is legacy code that has been used because

@@ -83,7 +83,7 @@ def test_strip_urls_removes_links_and_control_chars():
 
 
 def test_sanitize_display_name_falls_back_when_empty_after_scrub():
-    assert sanitize_display_name("platf-yndx.online") == "A LearnHouse user"
+    assert sanitize_display_name("platf-yndx.online") == "A WYD SEOUL 2027 user"
     assert sanitize_display_name("platf-yndx.online", fallback="Someone") == "Someone"
     assert sanitize_display_name("John Smith") == "John Smith"
 

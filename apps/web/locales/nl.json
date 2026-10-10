@@ -44,11 +44,11 @@
     "help": "Hulp",
     "help_menu": {
       "documentation": "Documentatie",
-      "website": "LearnHouse Website",
+      "website": "WYD SEOUL 2027 Website",
       "discord": "Discord",
       "report_feedback": "Probleem of feedback melden",
       "feedback_title": "Feedback Verzenden",
-      "feedback_description": "Help ons LearnHouse te verbeteren door je gedachten te delen, bugs te melden of nieuwe functies voor te stellen.",
+      "feedback_description": "Help ons WYD SEOUL 2027 te verbeteren door je gedachten te delen, bugs te melden of nieuwe functies voor te stellen.",
       "feedback_placeholder": "Vertel ons wat je denkt...",
       "feedback_success": "Bedankt voor je feedback!",
       "send_feedback": "Feedback Verzenden",
@@ -215,7 +215,7 @@
     "organizations": "Organisaties",
     "billing": "Facturering",
     "create_organization": "Organisatie aanmaken",
-    "copyright": "© {{year}} LearnHouse, Inc.",
+    "copyright": "© {{year}} WYD SEOUL 2027, Inc.",
     "delete_organization_error": "Kan deze organisatie niet verwijderen. Probeer het opnieuw.",
     "org_actions": "Organisatieacties",
     "manage_upgrade": "Beheren / Upgraden",
@@ -352,17 +352,17 @@
     "sso_error": "SSO-authenticatie mislukt. Probeer het opnieuw.",
     "error_generic": "Er is iets misgegaan. Probeer het opnieuw.",
     "sign_in": "Inloggen",
-    "terms_text": "Door door te gaan, ga je akkoord met LearnHouse's",
+    "terms_text": "Door door te gaan, ga je akkoord met WYD SEOUL 2027's",
     "terms_of_service": "Servicevoorwaarden",
     "and": "en",
     "privacy_policy": "Privacybeleid",
     "image_title_forgot": "Stel je wachtwoord opnieuw in.",
     "image_subtitle_forgot": "We helpen je in een mum van tijd weer in je account.",
-    "image_title_login": "Welkom terug bij LearnHouse.",
+    "image_title_login": "Welkom terug bij WYD SEOUL 2027.",
     "image_subtitle_login": "Ga verder waar je gebleven was: je cursussen, studenten en tools staan klaar.",
     "image_title_reset": "Bijna klaar.",
     "image_subtitle_reset": "Maak een sterk wachtwoord om je account veilig te houden.",
-    "image_title_signup": "Begin met lesgeven met LearnHouse.",
+    "image_title_signup": "Begin met lesgeven met WYD SEOUL 2027.",
     "image_subtitle_signup": "Maak je account aan en lanceer je eerste cursus in enkele minuten.",
     "image_title_verify": "Verifieer je e-mailadres.",
     "image_subtitle_verify": "Eén snelle stap om je account te beveiligen en aan de slag te gaan.",
@@ -2330,8 +2330,8 @@
         "label_placeholder": "Selecteer een organisatielabel",
         "about": "Over de organisatie",
         "about_placeholder": "Gedetailleerde beschrijving van je organisatie",
-        "showcase_explore": "Weergeven op LearnHouse Explore",
-        "showcase_description": "Deel de cursussen en inhoud van je organisatie met de LearnHouse-gemeenschap. Schakel dit in om studenten te helpen waardevolle educatieve bronnen te vinden.",
+        "showcase_explore": "Weergeven op WYD SEOUL 2027 Explore",
+        "showcase_description": "Deel de cursussen en inhoud van je organisatie met de WYD SEOUL 2027-gemeenschap. Schakel dit in om studenten te helpen waardevolle educatieve bronnen te vinden.",
         "save_changes": "Wijzigingen opslaan",
         "saving": "Opslaan...",
         "update_success": "Organisatiegegevens bijgewerkt",
@@ -2342,9 +2342,9 @@
         "footer_text_desc": "Aangepaste tekst die onderaan je organisatiepagina's wordt weergegeven",
         "default_language": "Standaardtaal",
         "default_language_desc": "De taal die nieuwe bezoekers standaard zien en die wordt gebruikt voor e-mails namens deze organisatie. Leden kunnen hun eigen interfacetaal nog steeds wijzigen.",
-        "watermark_desc": "LearnHouse-watermerk tonen op organisatiepagina's",
+        "watermark_desc": "WYD SEOUL 2027-watermerk tonen op organisatiepagina's",
         "watermark_free_plan": "Watermerk wordt altijd getoond bij het gratis plan",
-        "watermark_label": "\"Made with LearnHouse\"-watermerk",
+        "watermark_label": "\"Made with WYD SEOUL 2027\"-watermerk",
         "watermark_ee": "Verborgen door je Enterprise Edition-licentie"
       },
       "images": {
@@ -4801,7 +4801,7 @@
       },
       "teach_the_world": {
         "title": "Leer & groei",
-        "description": "Bronnen om je te helpen het meeste uit LearnHouse te halen.",
+        "description": "Bronnen om je te helpen het meeste uit WYD SEOUL 2027 te halen.",
         "classroom": "Het klaslokaal",
         "classroom_desc": "Leer hoe je je cursussen kunt laten groeien en beheren",
         "university": "LearnHouse Universiteit",
@@ -4834,7 +4834,7 @@
       }
     },
     "welcome": {
-      "title": "Welkom bij LearnHouse",
+      "title": "Welkom bij WYD SEOUL 2027",
       "subtitle": "Maak cursussen, nodig leerlingen uit en deel kennis met de wereld.",
       "get_started": "Aan de slag",
       "features_title": "Alles wat je nodig hebt",
@@ -5134,7 +5134,7 @@
   "embed": {
     "not_supported_description": "Dit type activiteit vereist authenticatie en kan niet worden ingebed.",
     "not_supported_title": "Deze activiteit wordt niet ondersteund",
-    "powered_by": "Mogelijk gemaakt door LearnHouse",
+    "powered_by": "Mogelijk gemaakt door WYD SEOUL 2027",
     "visit_activity": "Activiteitpagina bezoeken"
   },
   "migration": {
@@ -5639,7 +5639,7 @@
         "title": "Wil je testen?",
         "body": "Ga naar de",
         "link": "Ontwikkelaarspagina",
-        "suffix": "om LearnHouse in plaats daarvan uit te proberen."
+        "suffix": "om WYD SEOUL 2027 in plaats daarvan uit te proberen."
       },
       "validation": {
         "required": "Verplicht",

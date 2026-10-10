@@ -31,8 +31,9 @@ from src.services.courses.locks import (
     is_locked_for_user,
     is_org_admin,
 )
+from src.services.courses.progression import course_is_sequential, sequential_lock_state
 
-ReaderState = Literal["ok", "draft", "unpaid", "locked"]
+ReaderState = Literal["ok", "draft", "unpaid", "locked", "sequential"]
 
 
 async def can_edit_course(request: Request, course_uuid: str, current_user, db_session: AsyncSession) -> bool:
@@ -141,7 +142,25 @@ async def _reader_state(
     )
     if not paid:
         return "unpaid"
-    return "locked" if activity_read.is_locked else "ok"
+    if activity_read.is_locked:
+        activity_read.lock_reason = activity_read.lock_reason or "restricted"
+        return "locked"
+    # Sequential progression: earlier activities must be completed first.
+    # Editors/admins are exempt so they can review a whole course.
+    if course_is_sequential(course):
+        is_anon = isinstance(current_user, AnonymousUser)
+        acting_user_id = None if is_anon else resolve_acting_user_id(current_user)
+        admin = False if is_anon else await is_org_admin(acting_user_id, course.org_id, db_session)
+        if not admin and not await can_edit_course(request, course.course_uuid, current_user, db_session):
+            locked, unlock_uuid = await sequential_lock_state(activity, course, acting_user_id, db_session)
+            if locked:
+                activity_read.content = {}
+                activity_read.details = None
+                activity_read.is_locked = True
+                activity_read.lock_reason = "sequential"
+                activity_read.unlock_activity_uuid = unlock_uuid
+                return "sequential"
+    return "ok"
 
 
 async def verify_activity_reader_access(
@@ -166,8 +185,9 @@ async def verify_activity_reader_access(
             raise HTTPException(status_code=401, detail="Authentication required")
         raise HTTPException(status_code=403, detail=decision.reason)
 
+    activity_read = ActivityRead.model_validate(activity)
     state = await _reader_state(
-        request, ActivityRead.model_validate(activity), activity, course, current_user, db_session
+        request, activity_read, activity, course, current_user, db_session
     )
     if state == "draft":
         raise HTTPException(status_code=404, detail="Activity not found")
@@ -175,6 +195,15 @@ async def verify_activity_reader_access(
         raise HTTPException(status_code=402, detail="This activity requires a purchase")
     if state == "locked":
         raise HTTPException(status_code=403, detail="This activity is locked")
+    if state == "sequential":
+        raise HTTPException(
+            status_code=403,
+            detail={
+                "code": "SEQUENTIAL_LOCK",
+                "message": "Complete the previous activity to unlock this one",
+                "unlock_activity_uuid": activity_read.unlock_activity_uuid,
+            },
+        )
 
 
 async def verify_activity_reader_access_by_uuid(

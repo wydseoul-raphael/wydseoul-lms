@@ -42,7 +42,7 @@ from src.security.security import SECRET_KEY
 
 logger = logging.getLogger(__name__)
 
-TOTP_ISSUER = "LearnHouse"
+TOTP_ISSUER = "WYD SEOUL 2027"
 TOTP_PERIOD_SECONDS = 30
 # Accept the immediately preceding and following timestep. Phone clock drift is
 # the single most common cause of "my code doesn't work" support tickets; one

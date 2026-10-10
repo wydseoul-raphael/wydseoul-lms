@@ -16,6 +16,7 @@ from src.services.auth.magic_login import (
     send_magic_login_email,
 )
 from src.services.auth.session import mint_session_tokens
+from src.services.users.emails import LOGO_SVG  # platform wordmark
 
 
 class _FakeRedis:
@@ -179,9 +180,9 @@ class TestSendMagicLoginEmail:
                 _fake_user_read(), "learner@example.com", "https://app.test", "tok"
             )
         call = send_mock.call_args.kwargs
-        assert call["subject"] == "Your LearnHouse login link"
-        assert "Sign in to LearnHouse" in call["body"]
-        assert "<svg" in call["body"]
+        assert call["subject"] == "Your WYD SEOUL 2027 login link"
+        assert "Sign in to WYD SEOUL 2027" in call["body"]
+        assert LOGO_SVG in call["body"]
         assert "Powered by LearnHouse" not in call["body"]
         assert call["sender_name"] is None
 
@@ -206,7 +207,7 @@ class TestSendMagicLoginEmail:
         assert '<img src="https://api.test/content/orgs/o/logos/l.png"' in call["body"]
         assert "background-color: #1d4ed8;" in call["body"]
         assert "LearnHouse" not in call["body"]
-        assert "<svg" not in call["body"]
+        assert LOGO_SVG not in call["body"]
         assert call["sender_name"] == "Acme Academy"
         assert "https://academy.example.com/auth/magic?token=tok" in call["body"]
 

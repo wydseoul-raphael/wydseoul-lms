@@ -192,6 +192,23 @@
   --color-chart-3: hsl(var(--chart-3));
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
+
+  /* WYD SEOUL 2027 palette (bg-wyd-blue, text-wyd-muted, border-wyd-line, …).
+     Mirrors lib/wyd/brand.ts; keep both in sync. */
+  --color-wyd-blue: #0047bb;
+  --color-wyd-blue-dark: #082b67;
+  --color-wyd-navy: #071f47;
+  --color-wyd-red: #f32735;
+  --color-wyd-yellow: #fbe126;
+  --color-wyd-ink: #111111;
+  --color-wyd-muted: #687386;
+  --color-wyd-line: #dfe4ec;
+  --color-wyd-surface: #ffffff;
+  --color-wyd-success: #16835c;
+  --color-wyd-canvas: #f5f7fb;
+  --color-wyd-stage: #0a0d13;
+  --radius-wyd: 14px;
+  --radius-wyd-lg: 18px;
 }
 
 /*
@@ -247,7 +264,7 @@
     padding: 0;
     margin: 0;
     scrollbar-gutter: stable;
-    font-family: var(--font-default, 'Wix Madefor Text'), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--font-default, 'Inter'), 'Pretendard Variable', Pretendard, var(--font-kr, 'Noto Sans KR'), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     letter-spacing: -0.02em;
   }
 
@@ -300,10 +317,12 @@
     box-sizing: border-box;
   }
 
+  /* The learning center is a light-only product: OS dark mode must not flip
+     the canvas. */
   @media (prefers-color-scheme: dark) {
     body {
-      color: black;
-      background: #fbfbfb;
+      color: #111111;
+      background: #f5f7fb;
     }
   }
 
@@ -385,25 +404,26 @@
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    /* WYD SEOUL 2027 palette as shadcn HSL triplets (see lib/wyd/brand.ts). */
+    --primary: 217 100% 37%;            /* #0047bb */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 43% 97%;           /* #f5f7fb */
+    --secondary-foreground: 218 86% 22%; /* #082b67 */
+    --muted: 217 25% 94%;
+    --muted-foreground: 218 13% 47%;    /* #687386 */
+    --accent: 220 43% 97%;
+    --accent-foreground: 218 86% 22%;
+    --destructive: 356 89% 55%;         /* #f32735 */
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 25% 90%;              /* #dfe4ec */
+    --input: 217 25% 90%;
+    --ring: 217 100% 37%;
+    --chart-1: 217 100% 37%;
+    --chart-2: 356 89% 55%;
+    --chart-3: 54 96% 57%;              /* #fbe126 */
+    --chart-4: 157 71% 30%;             /* #16835c */
+    --chart-5: 218 86% 22%;
+    --radius: 0.875rem;
 
     /* Z-Index Layering System */
     --z-behind: -10;
@@ -438,19 +458,19 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 217 100% 62%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 356 80% 45%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --ring: 217 100% 62%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -464,7 +484,7 @@
   html,
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-default, 'Wix Madefor Text'), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--font-default, 'Inter'), 'Pretendard Variable', Pretendard, var(--font-kr, 'Noto Sans KR'), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     letter-spacing: -0.02em;
   }
 

@@ -3,7 +3,7 @@ import React from 'react'
 import ClientAdminLayout from './ClientAdminLayout'
 
 export const metadata: Metadata = {
-  title: 'LearnHouse Dashboard',
+  title: 'WYD SEOUL 2027 Dashboard',
 }
 
 async function DashboardLayout(

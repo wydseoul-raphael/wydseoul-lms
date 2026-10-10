@@ -46,11 +46,11 @@
     "help": "مساعدة",
     "help_menu": {
       "documentation": "الوثائق",
-      "website": "موقع LearnHouse",
+      "website": "موقع WYD SEOUL 2027",
       "discord": "Discord",
       "report_feedback": "الإبلاغ عن مشكلة أو ملاحظات",
       "feedback_title": "إرسال ملاحظات",
-      "feedback_description": "ساعدنا في تحسين LearnHouse من خلال مشاركة أفكارك أو الإبلاغ عن الأخطاء أو اقتراح ميزات جديدة.",
+      "feedback_description": "ساعدنا في تحسين WYD SEOUL 2027 من خلال مشاركة أفكارك أو الإبلاغ عن الأخطاء أو اقتراح ميزات جديدة.",
       "feedback_placeholder": "أخبرنا بما يدور في ذهنك...",
       "feedback_success": "شكراً لملاحظاتك!",
       "send_feedback": "إرسال ملاحظات",
@@ -215,7 +215,7 @@
     "organizations": "المؤسسات",
     "billing": "الفوترة",
     "create_organization": "إنشاء مؤسسة",
-    "copyright": "© {{year}} LearnHouse, Inc.",
+    "copyright": "© {{year}} WYD SEOUL 2027, Inc.",
     "delete_organization_error": "تعذّر حذف هذه المؤسسة. يرجى المحاولة مرة أخرى.",
     "org_actions": "إجراءات المؤسسة",
     "manage_upgrade": "إدارة / ترقية",
@@ -366,11 +366,11 @@
     "privacy_policy": "سياسة الخصوصية",
     "image_title_forgot": "أعد تعيين كلمة مرورك.",
     "image_subtitle_forgot": "سنساعدك على العودة إلى حسابك في لمح البصر.",
-    "image_title_login": "مرحبًا بعودتك إلى LearnHouse.",
+    "image_title_login": "مرحبًا بعودتك إلى WYD SEOUL 2027.",
     "image_subtitle_login": "تابِع من حيث توقفت: دوراتك وطلابك وأدواتك في انتظارك.",
     "image_title_reset": "أوشكت على الانتهاء.",
     "image_subtitle_reset": "أنشئ كلمة مرور قوية للحفاظ على أمان حسابك.",
-    "image_title_signup": "ابدأ التدريس مع LearnHouse.",
+    "image_title_signup": "ابدأ التدريس مع WYD SEOUL 2027.",
     "image_subtitle_signup": "أنشئ حسابك وأطلق دورتك الأولى في دقائق.",
     "image_title_verify": "تحقّق من بريدك الإلكتروني.",
     "image_subtitle_verify": "خطوة سريعة واحدة لتأمين حسابك والبدء.",
@@ -976,6 +976,74 @@
     "search_results": "تم العثور على {{count}} بودكاست لـ \"{{query}}\""
   },
   "activities": {
+    "video_quiz": {
+      "checkpoint_title": "Checkpoint question",
+      "question_n_of_m": "Question {{n}} of {{m}}",
+      "submit": "Submit answer",
+      "continue": "Continue video",
+      "retry": "Try again",
+      "correct": "Correct!",
+      "incorrect": "Not quite.",
+      "must_answer_correctly": "Answer correctly to continue the video.",
+      "seek_blocked": "Answer the upcoming question before skipping ahead.",
+      "end_title": "Lesson quiz",
+      "end_locked": "Finish watching the video to unlock the quiz.",
+      "end_description": "Score {{score}}% to complete this lesson.",
+      "score": "Score",
+      "passed": "Passed",
+      "failed": "Not passed yet",
+      "attempts_used": "{{used}} attempt(s) used",
+      "attempts_remaining": "{{n}} attempt(s) remaining",
+      "unlimited_attempts": "Unlimited attempts",
+      "wrong_questions": "Review these questions:",
+      "activity_completed": "Lesson completed!",
+      "submitting": "Submitting…",
+      "failed_submit": "Could not submit. Please try again.",
+      "select_one": "Select one answer",
+      "select_all_that_apply": "Select all that apply",
+      "true": "True",
+      "false": "False",
+      "no_attempts_left": "No attempts remaining. Contact your coordinator."
+    },
+    "video_engine": {
+      "unavailable": "This video is not available right now.",
+      "failover": "Switched to a backup video source.",
+      "no_source": "No video source configured.",
+      "superseded": "Playback started in another tab or device, so this tab stopped recording progress.",
+      "back_15": "Back 15 seconds",
+      "position": "Playback position",
+      "video_completed": "Video completed",
+      "session_error": "Could not start a verified watch session for this video.",
+      "verified_watch": "Verified viewing time",
+      "remaining": "{{time}} remaining",
+      "completed": "Video completed",
+      "seek_restricted": "You can only move within the portion you have already watched. Rewinding is always available.",
+      "seek_allowed_until": "Available through {{time}}",
+      "sync_error": "Progress could not be saved. Check your connection and continue playing.",
+      "superseded_title": "Playback started in another tab",
+      "superseded_body": "This tab stopped recording progress because the video was opened somewhere else.",
+      "continue_here": "Continue here",
+      "duration_missing": "The video length has not been verified by an administrator yet, so viewing is not credited.",
+      "source_switched": "Switched to a backup video source.",
+      "source_failed": "This video is unavailable right now.",
+      "sign_video": "Sign language video",
+      "show_sign": "Show sign language",
+      "hide_sign": "Hide sign language",
+      "captions": "Captions",
+      "captions_off": "Off",
+      "speed": "Speed",
+      "play": "Play",
+      "pause": "Pause",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "fullscreen": "Fullscreen",
+      "rewind_15": "Rewind 15 seconds",
+      "forward_15": "Forward 15 seconds",
+      "quiz_pending": "Video done — pass the quiz to complete this lesson.",
+      "locked_sequential": "Complete the previous lesson to unlock this one.",
+      "go_to_unlock": "Go to the previous lesson",
+      "auto_complete_hint": "This lesson is completed automatically after watching 90% of the video."
+    },
     "video": "فيديو",
     "document": "مستند",
     "page": "صفحة",
@@ -1200,7 +1268,7 @@
     "stripe_wait": "يرجى الانتظار بينما نكمل إعداد تكامل Stripe الخاص بك...",
     "stripe_return": "يمكنك الآن العودة إلى لوحة التحكم للبدء في استخدام المدفوعات.",
     "stripe_retry": "يرجى المحاولة مرة أخرى أو الاتصال بالدعم إذا استمرت المشكلة.",
-    "stripe_login_required": "لم تقم بتسجيل الدخول إلى LearnHouse في هذا المتصفح. سجّل الدخول، ثم ابدأ الربط من جديد من إعدادات المدفوعات.",
+    "stripe_login_required": "لم تقم بتسجيل الدخول إلى WYD SEOUL 2027 في هذا المتصفح. سجّل الدخول، ثم ابدأ الربط من جديد من إعدادات المدفوعات.",
     "subscription": "اشتراك",
     "benefits": "المزايا:",
     "min_price": "السعر الأدنى:",
@@ -1466,7 +1534,7 @@
           "rate_limited": "محاولات كثيرة جدًا. يرجى الانتظار قليلًا ثم المحاولة مرة أخرى.",
           "status_error": "تعذّر تحميل إعدادات التحقق بخطوتين.",
           "copy_failed": "تعذّر النسخ. يرجى تحديد النص ونسخه يدويًا.",
-          "codes_file_header": "رموز النسخ الاحتياطي للتحقق بخطوتين في LearnHouse. يمكن استخدام كل رمز مرة واحدة.",
+          "codes_file_header": "رموز النسخ الاحتياطي للتحقق بخطوتين في WYD SEOUL 2027. يمكن استخدام كل رمز مرة واحدة.",
           "already_enabled": "التحقق بخطوتين مفعّل بالفعل على هذا الحساب.",
           "setup_failed": "تعذّر بدء إعداد التحقق بخطوتين. يرجى المحاولة مرة أخرى.",
           "enabled_toast": "تم تفعيل التحقق بخطوتين.",
@@ -1550,6 +1618,100 @@
     "minutes_ago": "منذ {{count}} دقائق"
   },
   "dashboard": {
+    "learning_management": {
+      "title": "Learning management",
+      "subtitle": "Mandatory training completion across volunteers",
+      "keywords": "completion, required courses, progress, deadline, 이수",
+      "empty": "No data yet",
+      "pagination": "{{from}}–{{to}} of {{total}}",
+      "status": {
+        "completed": "Completed",
+        "in_progress": "In progress",
+        "not_started": "Not started"
+      },
+      "kpi": {
+        "members": "Members",
+        "required_courses": "Required courses",
+        "completed_all": "Completed all required",
+        "at_risk": "At risk",
+        "dau": "Active today",
+        "enrolled": "Enrolled",
+        "started": "Started",
+        "completed": "Completed",
+        "avg_watch_time": "Avg verified watch time"
+      },
+      "funnel": {
+        "title": "Required training funnel",
+        "members": "Members",
+        "enrolled_any": "Enrolled in a required course",
+        "completed_any": "Completed a required course",
+        "completed_all": "Completed all required courses"
+      },
+      "dau": {
+        "title": "Daily active learners (30 days)"
+      },
+      "required_courses": {
+        "title": "Courses",
+        "course": "Course",
+        "type": "Type",
+        "deadline": "Deadline",
+        "days_left": "{{n}} days left",
+        "overdue": "Overdue",
+        "enrolled": "Enrolled",
+        "completed": "Completed",
+        "rate": "Completion",
+        "required": "Required",
+        "optional": "Optional"
+      },
+      "at_risk": {
+        "title": "Learners at risk",
+        "help": "Not finished with required training and inactive for {{days}}+ days, or behind the pace their deadline implies.",
+        "none": "Nobody is at risk right now",
+        "days_inactive": "Inactive days",
+        "reason": "Reason",
+        "reason_inactive": "Inactive",
+        "reason_behind_pace": "Behind pace",
+        "last_active": "Last active",
+        "never_active": "Never active",
+        "progress": "Required done",
+        "expected": "expected"
+      },
+      "course": {
+        "subtitle": "Who watched what, quiz scores and completion",
+        "tabs": {
+          "learners": "Learners",
+          "activities": "Activities"
+        },
+        "filters": {
+          "all": "All statuses",
+          "search_placeholder": "Search name or email…"
+        },
+        "columns": {
+          "learner": "Learner",
+          "status": "Status",
+          "progress": "Progress",
+          "certificate": "Certificate"
+        },
+        "activities": {
+          "completion_title": "Completions per activity"
+        },
+        "dropoff": {
+          "title": "Where learners stop",
+          "help": "Furthest verified position per learner, by 10% of the video."
+        }
+      },
+      "learner": {
+        "required_courses": "Required courses done",
+        "all_required_completed": "All required training completed",
+        "certificates": "Certificates",
+        "courses": "Courses",
+        "certificate": "View certificate"
+      },
+      "export": {
+        "csv": "Export CSV",
+        "downloading": "Downloading…"
+      }
+    },
     "nav": {
       "sidebar_navigation": "شريط التنقل الجانبي للوحة التحكم",
       "mobile_navigation": "تنقل لوحة التحكم للجوال",
@@ -1635,6 +1797,14 @@
       "includes_purchased": "يشمل {{count}} مشتراة"
     },
     "courses": {
+      "wyd": {
+        "title": "WYD learning settings",
+        "sequential": "Sequential progression",
+        "sequential_help": "Each lesson unlocks only after the previous one is completed (verified video / passed quiz).",
+        "required": "Required course (counts toward mandatory training)",
+        "required_help": "Required courses appear in the completion dashboard and trigger the logistics notification when all are done.",
+        "deadline": "Completion deadline"
+      },
       "title": "الدورات",
       "rights_guide": "دليل الحقوق",
       "create_course": "إنشاء دورة",
@@ -2509,9 +2679,9 @@
         "email_sender_name_desc": "الاسم الذي يراه المستلمون في رسائل البريد الإلكتروني المُرسَلة لهذه المنظمة: روابط تسجيل الدخول، وإعادة تعيين كلمة المرور، والدعوات، ورسائل التحقق والترحيب. تحمل هذه الرسائل أيضًا شعارك ولون علامتك التجارية على الأزرار وإعداد العلامة المائية. الاسم وحده هو ما يتغير هنا، أما عنوان الإرسال فيبقى عنوان المنصة، وهذا ما يُبقي هذه الرسائل مجتازة لفحوصات SPF و DKIM. اتركه فارغًا لاستخدام الاسم الافتراضي للمنصة.",
         "default_language": "اللغة الافتراضية",
         "default_language_desc": "اللغة التي يراها الزوار الجدد افتراضيًا واللغة المستخدمة للرسائل المُرسَلة باسم هذه المؤسسة. لا يزال بإمكان الأعضاء تغيير لغة واجهتهم.",
-        "watermark_desc": "إظهار علامة LearnHouse المائية على صفحات منظمتك",
+        "watermark_desc": "إظهار علامة WYD SEOUL 2027 المائية على صفحات منظمتك",
         "watermark_free_plan": "يتم عرض العلامة المائية دائمًا في الخطة المجانية",
-        "watermark_label": "علامة \"صنع بواسطة LearnHouse\" المائية",
+        "watermark_label": "علامة \"صنع بواسطة WYD SEOUL 2027\" المائية",
         "watermark_ee": "مخفي بترخيص الإصدار المؤسسي"
       },
       "images": {
@@ -2660,7 +2830,7 @@
         },
         "previews": {
           "thumbnail_title": "الصورة المصغّرة",
-          "thumbnail_desc": "صورة الغلاف لمؤسستك عند إدراجها أو مشاركتها: في صفحة الاستكشاف على LearnHouse وفي معاينات الروابط.",
+          "thumbnail_desc": "صورة الغلاف لمؤسستك عند إدراجها أو مشاركتها: في صفحة الاستكشاف على WYD SEOUL 2027 وفي معاينات الروابط.",
           "thumbnail_add": "إضافة صورة مصغّرة",
           "thumbnail_replace": "استبدال الصورة المصغّرة",
           "gallery_title": "معرض المعاينة",
@@ -5272,7 +5442,7 @@
   "embed": {
     "not_supported_description": "هذا النوع من النشاط يتطلب المصادقة ولا يمكن تضمينه.",
     "not_supported_title": "هذا النشاط غير مدعوم",
-    "powered_by": "مدعوم من LearnHouse",
+    "powered_by": "مدعوم من WYD SEOUL 2027",
     "visit_activity": "زيارة صفحة النشاط"
   },
   "analytics": {
@@ -5976,7 +6146,7 @@
       },
       "teach_the_world": {
         "title": "تعلّم وانمُ",
-        "description": "موارد لمساعدتك في الاستفادة القصوى من LearnHouse.",
+        "description": "موارد لمساعدتك في الاستفادة القصوى من WYD SEOUL 2027.",
         "classroom": "الفصل الدراسي",
         "classroom_desc": "تعلم كيفية تنمية وإدارة دوراتك",
         "university": "جامعة LearnHouse",
@@ -6009,7 +6179,7 @@
       }
     },
     "welcome": {
-      "title": "مرحبًا بك في LearnHouse",
+      "title": "مرحبًا بك في WYD SEOUL 2027",
       "subtitle": "أنشئ دورات، وادعُ المتعلمين، وشارك المعرفة مع العالم.",
       "get_started": "ابدأ الآن",
       "features_title": "كل ما تحتاجه",
@@ -6592,7 +6762,7 @@
         "title": "تريد التجربة؟",
         "body": "توجّه إلى",
         "link": "صفحة المطوّرين",
-        "suffix": "لتجربة LearnHouse بدلًا من ذلك."
+        "suffix": "لتجربة WYD SEOUL 2027 بدلًا من ذلك."
       },
       "validation": {
         "required": "مطلوب",
@@ -6708,6 +6878,155 @@
     "pricing": {
       "from": "ابتداءً من",
       "subscription": "اشتراك"
+    }
+  },
+  "wyd": {
+    "brand": {
+      "appName": "WYD SEOUL 2027 Volunteer Online Learning Center",
+      "tagline": "Learn. Grow. Together.",
+      "name": "WYD SEOUL 2027",
+      "subtitle": "Volunteer Online Learning Center"
+    },
+    "nav": {
+      "home": "Home",
+      "about": "About training",
+      "learning": "My learning",
+      "preview": "Guest preview",
+      "enroll": "Optional course enrollment",
+      "mypage": "My profile",
+      "admin": "Administration",
+      "login": "Sign in",
+      "logout": "Sign out",
+      "signup": "Create account",
+      "language": "Language",
+      "main": "Main navigation",
+      "skipToContent": "Skip to main content"
+    },
+    "home": {
+      "eyebrow": "A place for everyone to learn",
+      "title": "Learn, prepare, and serve together.",
+      "body": "Complete required training, choose courses for your role, and track your learning in one place.",
+      "startLearning": "Start learning",
+      "note": "Your pace. Your language. Your next step.",
+      "benefitVideo": "Learn through video",
+      "benefitMultilingual": "Learning across languages",
+      "benefitGrowth": "See your progress grow",
+      "journey": "Your learning journey",
+      "chooseYourPath": "Where will learning take you?",
+      "chooseYourPathBody": "From the essentials to the topics that inspire you.",
+      "essentials": "Essentials",
+      "discovery": "Discovery",
+      "required": "Required courses",
+      "optional": "Optional courses",
+      "buildYourFoundation": "A strong start, together",
+      "requiredPathBody": "Build the essential knowledge to prepare for your next step.",
+      "followYourCuriosity": "Make room for discovery",
+      "optionalPathBody": "Choose training that fits your interests and your role.",
+      "oneStep": "One step at a time",
+      "betterTogether": "Better together",
+      "togetherTitle": "Learning together takes us further.",
+      "guestCard": "Multilingual online learning",
+      "guestCardBody": "Create an account to access required and optional training.",
+      "watchPreview": "Watch preview",
+      "continue": "Continue",
+      "start": "Start course",
+      "progress": "Required training progress",
+      "leader": "Leader training",
+      "educationIntroShort": "Discover our purpose and how learning works."
+    },
+    "about": {
+      "lead": "This center helps volunteers prepare the shared knowledge and role-specific skills needed to serve on site.",
+      "purpose": "Purpose",
+      "purposeBody": "Required courses cover shared safety, event and service principles. Choose optional courses according to your role and interests.",
+      "learningFlow": "How learning works",
+      "learningFlowBody": "Videos follow a sequence. Meet each viewing requirement to unlock the next video. Some videos include a quiz.",
+      "multilingual": "Learning across languages",
+      "multilingualBody": "The interface supports English, Korean, Italian, French, Spanish and Portuguese. Course translations are prepared by the content team."
+    },
+    "copyright": {
+      "title": "Training copyright and use",
+      "lead": "Use training materials within the permissions granted by the organization. Final policy wording is subject to review before launch.",
+      "educationalUse": "Educational use",
+      "educationalUseBody": "Videos, documents and images are provided for the designated training purpose and authorized use.",
+      "redistribution": "Redistribution",
+      "redistributionBody": "Copying, redistribution or commercial use may be restricted without separate authorization.",
+      "attribution": "Attribution and rights holders",
+      "attributionBody": "Identify the sources and rights holders of external materials and verify the required permissions."
+    },
+    "contributors": {
+      "title": "With gratitude",
+      "lead": "Educators, translators, producers and operators make this training possible. Names and affiliations will be added when the contributor list is confirmed.",
+      "educationTeam": "Curriculum and education",
+      "translationTeam": "Multilingual translation team",
+      "videoTeam": "Video production team",
+      "platformTeam": "Platform development and operations"
+    },
+    "preview": {
+      "eyebrow": "Guest preview",
+      "title": "Experience the WYD volunteer introduction",
+      "body": "Watch the official introduction before creating an account. Preview activity is not saved.",
+      "notice": "Create an account to save progress, take quizzes and receive certificates.",
+      "aboutLesson": "About this lesson",
+      "lessonDescription": "This preview shows how video learning works. Sign in to save progress, use translated scripts and receive completion certificates.",
+      "exitLesson": "Exit lesson",
+      "signup": "Create account",
+      "signedInCta": "Go to my learning"
+    },
+    "player": {
+      "play": "Play",
+      "pause": "Pause",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "fullscreen": "Full screen",
+      "label": "Course video player",
+      "error": "The video player encountered an error.",
+      "unavailable": "This video is unavailable or private.",
+      "loading": "Loading…",
+      "seekUnavailable": "Seeking is disabled in this player."
+    },
+    "learning": {
+      "welcome": "A little progress, every day.",
+      "overview": "Your learning at a glance",
+      "paths": "Your learning paths",
+      "progress": "Required training progress",
+      "completedLessons": "Completed lessons",
+      "totalLessons": "Required lessons",
+      "noCourses": "No courses are available.",
+      "browseCourses": "Explore courses",
+      "loginRequired": "Sign in to continue.",
+      "continue": "Continue",
+      "start": "Start course",
+      "certificates": "Certificates",
+      "requiredCourses": "Required courses",
+      "optionalCourses": "Optional courses",
+      "inProgress": "In progress",
+      "completed": "Completed",
+      "notStarted": "Not started",
+      "viewCourse": "View course"
+    },
+    "enroll": {
+      "title": "Optional course enrollment",
+      "help": "Enroll in an optional course before starting it.",
+      "enroll": "Enroll",
+      "enrolled": "Enrolled",
+      "notEnrolled": "Not enrolled",
+      "cancel": "Cancel enrollment",
+      "noEnrollments": "You have not enrolled in any optional courses yet.",
+      "findOptionalCourses": "Find optional courses",
+      "loginRequired": "Sign in to enroll in optional courses."
+    },
+    "footer": {
+      "about": "About training",
+      "copyright": "Copyright",
+      "contributors": "Contributors",
+      "tagline": "Learn. Grow. Together.",
+      "rights": "All rights reserved."
+    },
+    "notFound": {
+      "eyebrow": "Page not found",
+      "title": "We could not find that page.",
+      "body": "The address may be incorrect or the page may have moved. Return home or sign in to continue learning.",
+      "goHome": "Go to home"
     }
   }
 }

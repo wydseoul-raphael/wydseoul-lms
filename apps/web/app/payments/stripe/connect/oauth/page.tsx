@@ -12,7 +12,7 @@ import {
   stripeCallbackStep,
 } from '@lib/payments/stripeConnectCallback'
 import Image from 'next/image'
-import learnhouseIcon from 'public/learnhouse_bigicon_1.png'
+import learnhouseIcon from 'public/wyd/wyd-emblem.png'
 import { useTranslation } from 'react-i18next'
 
 function StripeConnectCallbackInner() {

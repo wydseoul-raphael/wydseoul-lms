@@ -956,7 +956,7 @@ def _render_magic_link_error(title: str, message: str) -> HTMLResponse:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LearnHouse sign-in link</title>
+<title>WYD SEOUL 2027 sign-in link</title>
 <style>
   body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
          background: #f6f7f9; color: #111827; margin: 0;

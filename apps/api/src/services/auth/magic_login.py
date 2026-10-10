@@ -117,6 +117,7 @@ def send_magic_login_email(
     from src.services.email.translations import t
     from src.services.users.emails import (
         LOGO_SVG,
+        PLATFORM_BRAND_NAME,
         STYLES,
         _brand_logo_html,
         _button_style,
@@ -127,7 +128,7 @@ def send_magic_login_email(
     login_url = f"{base_url.rstrip('/')}/auth/magic?token={safe_token}"
     safe_name = html.escape(user.username or user.email)
     white_label = bool(org_name)
-    brand = html.escape(org_name) if org_name else "LearnHouse"
+    brand = html.escape(org_name) if org_name else PLATFORM_BRAND_NAME
 
     heading = t(lang, "magic_login.heading", brand=brand)
     body_text = t(lang, "magic_login.body", username=safe_name)
@@ -147,7 +148,7 @@ def send_magic_login_email(
     return send_email(
         to=email,
         # Plain-text subject: the org name must not arrive HTML-escaped.
-        subject=t(lang, "magic_login.subject", brand=org_name or "LearnHouse"),
+        subject=t(lang, "magic_login.subject", brand=org_name or PLATFORM_BRAND_NAME),
         body=_email_layout(
             title=heading,
             body_content=body_content,

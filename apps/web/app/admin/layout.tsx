@@ -10,8 +10,8 @@ export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | LearnHouse Admin',
-    default: 'LearnHouse Admin',
+    template: '%s | WYD SEOUL 2027 Admin',
+    default: 'WYD SEOUL 2027 Admin',
   },
 }
 
