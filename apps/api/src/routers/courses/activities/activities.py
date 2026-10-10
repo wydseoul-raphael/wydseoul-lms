@@ -36,6 +36,14 @@ from src.services.courses.activities.video import (
     update_video_activity,
     update_external_video_activity,
 )
+from src.services.courses.activities.video_admin import (
+    VideoPlaybackConfigIn,
+    delete_manual_caption,
+    probe_video_url,
+    update_playback_config,
+    upload_manual_caption,
+    upload_sign_video,
+)
 from src.services.courses.lock_usergroups import (
     add_usergroup_to_activity,
     get_activity_usergroups,
@@ -550,6 +558,82 @@ async def api_configure_video_captions(
     db_session=Depends(get_db_session),
 ) -> dict:
     return await configure_captions(request, activity_uuid, current_user, db_session, config)
+
+
+@router.get(
+    "/video/probe",
+    summary="Identify a video URL (YouTube/Vimeo) and fetch its duration when possible",
+    description="Extracts the provider and id from a pasted URL. For Vimeo the duration comes from oEmbed; YouTube durations are measured in the browser.",
+)
+async def api_probe_video_url(
+    url: str = Query(..., max_length=2048),
+    current_user: PublicUser = Depends(get_current_user),
+) -> dict:
+    return await probe_video_url(url)
+
+
+@router.put(
+    "/video/{activity_uuid}/playback-config",
+    summary="Update playback sources, sign video, trusted duration and watch verification",
+    description=(
+        "Stores the ordered playback sources (hosted first, YouTube/Vimeo backups for failover), "
+        "the sign-language companion, the admin-verified duration used by watch verification, "
+        "and the verifiedWatch switch. Requires UPDATE rights on the course."
+    ),
+)
+async def api_update_playback_config(
+    request: Request,
+    activity_uuid: str,
+    config: VideoPlaybackConfigIn,
+    current_user: PublicUser = Depends(get_current_user),
+    db_session=Depends(get_db_session),
+) -> dict:
+    return await update_playback_config(request, activity_uuid, current_user, db_session, config)
+
+
+@router.post(
+    "/video/{activity_uuid}/captions/{lang}",
+    summary="Upload a manual (volunteer-translated) caption track",
+    description="Accepts WebVTT or SubRip for one language; stored next to AI tracks and served by /stream/captions.",
+)
+async def api_upload_manual_caption(
+    request: Request,
+    activity_uuid: str,
+    lang: str,
+    file: UploadFile,
+    label: Optional[str] = Form(None),
+    current_user: PublicUser = Depends(get_current_user),
+    db_session=Depends(get_db_session),
+) -> dict:
+    return await upload_manual_caption(request, activity_uuid, lang, label, file, current_user, db_session)
+
+
+@router.delete(
+    "/video/{activity_uuid}/captions/{lang}",
+    summary="Remove a manual caption track",
+)
+async def api_delete_manual_caption(
+    request: Request,
+    activity_uuid: str,
+    lang: str,
+    current_user: PublicUser = Depends(get_current_user),
+    db_session=Depends(get_db_session),
+) -> dict:
+    return await delete_manual_caption(request, activity_uuid, lang, current_user, db_session)
+
+
+@router.post(
+    "/video/{activity_uuid}/sign-video",
+    summary="Upload a sign-language companion video",
+)
+async def api_upload_sign_video(
+    request: Request,
+    activity_uuid: str,
+    file: UploadFile,
+    current_user: PublicUser = Depends(get_current_user),
+    db_session=Depends(get_db_session),
+) -> dict:
+    return await upload_sign_video(request, activity_uuid, file, current_user, db_session)
 
 
 @router.put(
