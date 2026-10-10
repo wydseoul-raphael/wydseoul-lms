@@ -91,7 +91,11 @@ const nextConfig = {
   // multi-tenant run (DEMO_STACK.md) serves orgs from <slug>.lvh.me, so allow
   // that family of hosts. Dev-only; ignored by `next build`/`next start`.
   allowedDevOrigins: ['lvh.me', '*.lvh.me'],
-  output: 'standalone',
+  // `standalone` is for the Docker image (server-wrapper.js requires
+  // .next/standalone/server.js). Vercel's builder traces the app itself and
+  // fails on a standalone build (missing next-server.js.nft.json), so it is
+  // only enabled off-platform.
+  ...(process.env.VERCEL ? {} : { output: 'standalone' }),
   images: {
     remotePatterns: [
       {

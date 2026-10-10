@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev-https": "next dev --experimental-https -p 443",
-    "build": "next build",
+    "build": "node scripts/write-runtime-config.mjs && next build",
     "start": "next start",
     "lint": "eslint . || true",
     "lint:fix": "eslint --fix . || true",
