@@ -6,7 +6,10 @@ import jwt from 'jsonwebtoken'
 import Redis from 'ioredis'
 
 const PORT = parseInt(process.env.COLLAB_PORT || '4000', 10)
-const API_URL = process.env.LEARNHOUSE_API_URL || 'http://localhost:8000'
+// Base URL of the API service. On Vercel this is injected by the `api`
+// service binding (see /vercel.json); platform bindings may carry a trailing
+// slash, which would otherwise produce `//api/v1/...` below.
+const API_URL = (process.env.LEARNHOUSE_API_URL || 'http://localhost:8000').replace(/\/+$/, '')
 const SECRET_KEY = process.env.LEARNHOUSE_AUTH_JWT_SECRET_KEY || ''
 const INTERNAL_KEY = process.env.COLLAB_INTERNAL_KEY || ''
 const REDIS_URL = process.env.LEARNHOUSE_REDIS_URL || 'redis://localhost:6379'
@@ -76,10 +79,22 @@ const rateLimitCleanupInterval = setInterval(() => {
   }
 }, 5 * 60_000)
 
+// Public path prefix when this server is mounted behind a platform router
+// (Vercel rewrites `/collab/(.*)` here without stripping the prefix). Hocuspocus
+// derives the document name from the URL path, so `/collab/board:x` arrives as
+// `collab/board:x`. Every client on a deployment uses the same prefix, so the
+// prefixed name is still a stable room key; we only need to see through it.
+const PUBLIC_PATH_PREFIX = (process.env.COLLAB_PUBLIC_PATH_PREFIX || '/collab').replace(/^\/+|\/+$/g, '')
+
+function stripPublicPrefix(name: string): string {
+  if (!PUBLIC_PATH_PREFIX) return name
+  return name.startsWith(`${PUBLIC_PATH_PREFIX}/`) ? name.slice(PUBLIC_PATH_PREFIX.length + 1) : name
+}
+
 function extractBoardUuid(documentName: string): string | null {
   // Room naming: board:{board_uuid}. The uuid goes straight into API paths
   // and Redis keys, so only the exact shape the API mints is accepted.
-  const match = documentName.match(/^board:(board_[0-9a-f-]{36})$/)
+  const match = stripPublicPrefix(documentName).match(/^board:(board_[0-9a-f-]{36})$/)
   return match ? match[1] : null
 }
 
@@ -160,8 +175,10 @@ const server = new Server({
   port: PORT,
 
   async onRequest({ request, response }: onRequestPayload) {
-    // Health check endpoint. Handles both "/" (k8s probe) and "/health"
-    if (request.url === '/' || request.url === '/health') {
+    // Health check endpoint. Handles both "/" (k8s probe) and "/health",
+    // with or without the public path prefix (`/collab`, `/collab/health`).
+    const healthPath = `/${stripPublicPrefix((request.url || '/').replace(/^\/+/, ''))}`
+    if (healthPath === '/' || healthPath === '/health') {
       response.writeHead(200, { 'Content-Type': 'application/json' })
       response.end(JSON.stringify({ status: 'ok' }))
       // Throw falsy value to stop the hook chain without crashing.

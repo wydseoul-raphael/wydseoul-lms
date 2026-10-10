@@ -84,6 +84,19 @@ const getCookieValue = (name: string): string | null => {
 const getLEARNHOUSE_HTTP_PROTOCOL = () =>
   (getConfig('NEXT_PUBLIC_LEARNHOUSE_HTTPS') === 'true') ? 'https://' : 'http://'
 const getLEARNHOUSE_BACKEND_URL = () => getConfig('NEXT_PUBLIC_LEARNHOUSE_BACKEND_URL', 'http://localhost/')
+
+// Internal (service-to-service) backend URL, injected by the hosting platform.
+// On Vercel this is the `api` service binding declared in /vercel.json
+// (LEARNHOUSE_API_INTERNAL_URL); on Docker/VPS deploys it is simply unset.
+// Bindings resolve only inside server functions (route handlers, server
+// components), never in the browser bundle and never in proxy.ts, so every
+// caller that may run elsewhere falls back to the public backend URL.
+const getLEARNHOUSE_INTERNAL_BACKEND_URL = (): string | null => {
+  if (typeof window !== 'undefined') return null
+  const bound = process.env.LEARNHOUSE_API_INTERNAL_URL
+  if (!bound) return null
+  return bound.replace(/\/+$/, '') + '/'
+}
 const getLEARNHOUSE_DOMAIN = () => {
   // 1. Env var (backward compat for existing deploys)
   const envVal = getConfig('NEXT_PUBLIC_LEARNHOUSE_DOMAIN')
@@ -144,6 +157,10 @@ export const isOnCustomDomain = (): boolean => {
 
 // Derive API URL from backend URL (with backward compat for NEXT_PUBLIC_LEARNHOUSE_API_URL)
 const deriveAPIUrl = (): string => {
+  // Server-side: an internal service binding beats every public URL so
+  // server → API traffic never leaves the platform network.
+  const internalUrl = getLEARNHOUSE_INTERNAL_BACKEND_URL()
+  if (internalUrl) return `${internalUrl}api/v1/`
   // Backward compat: if explicit API URL is set, use it
   const explicitApiUrl = getConfig('NEXT_PUBLIC_LEARNHOUSE_API_URL')
   if (explicitApiUrl) return explicitApiUrl
@@ -168,7 +185,13 @@ export const getServerAPIUrl = () => {
   return deriveAPIUrl()
 }
 
+// Public backend URL (safe for the browser: media/content links, redirects).
 export const getBackendUrl = () => getLEARNHOUSE_BACKEND_URL()
+
+// Server-side only: backend base URL for server → API requests. Prefers the
+// internal service binding when the platform provides one.
+export const getServerBackendUrl = () =>
+  getLEARNHOUSE_INTERNAL_BACKEND_URL() || getLEARNHOUSE_BACKEND_URL()
 
 /**
  * Get the upgrade/plan URL for a given org.
